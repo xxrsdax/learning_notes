@@ -70,4 +70,6 @@ e.更改数据表示格式，视图可以返回与底层表的表示和格式不
 
 ​	DROP VIEW viewname;
 
+4.更新视图时，可以先用DROP再用CREATE，也可以直接用CREATE OR REPLACE VIEW.如果要更新的视图不存在，则第2条更新语句
+
 TODO待续；
