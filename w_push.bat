@@ -1,5 +1,6 @@
 C:
-cd  C:\Users\11786\Desktop\学习文件\learning_notes
+cd  C:\develop_study\learning_notes
 git add . 
-git commit -m "xxrsdax:数据库=》mysql=>视图"
+git commit -m "自动提交"
+git pull origin master 
 git push origin master
