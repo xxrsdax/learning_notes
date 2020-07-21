@@ -13,7 +13,7 @@
 <%int i = 0;
     System.out.println(i);
     //java单行注释
-%>
+%> 
 <%= i %>
 <%! String str = "ni hao java";
     /*java多行注释*/
