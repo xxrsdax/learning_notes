@@ -9,7 +9,7 @@
 
 <body>
 <!-- html注释 -->
-<%--jsp注释 --%>
+<%-- jsp注释 --%>
 <%int i = 0;
     System.out.println(i);
     //java单行注释
