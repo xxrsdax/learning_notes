@@ -1,6 +1,6 @@
 # 1.概述
 
-
+概述
 
 
 
@@ -8,23 +8,27 @@
 
 
 
+ddl
+
+
+
 # 3.增
 
-
+z
 
 
 
 # 4.删
 
-
+s
 
 # 5.改
 
-
+g
 
 # 7.查
 
-
+c
 
 # 8.视图
 
@@ -383,4 +387,84 @@ SELECT @tag;
 
 ### 11.2.2 INSERT 触发器
 
-// TODO 未完待续
+​	
+
+INSERT 触发器在INSERT语句执行之前或之后执行。
+
+
+
+- 在INSERT触发器代码内，可引用一个名为NEW的虚拟表，访问被插入的行；
+- 在BEFORE INSERT 触发器中，NEW 中的值也可以被更新（允许更改被插入的值）；
+- 对于 AUTO_INCREMENT列，NEW 在INSERT 执行之前包含0，在INSERT执行之后包含新的自动生成值。
+
+
+
+```mysql
+CREATE TRIGGER  neworder AFTER INSERT ON orders for EACH ROW SELECT NEW.order_num;
+```
+
+
+
+注意：通常 BEFORE 用于数据验证和净化。
+
+
+
+
+
+### 11.2.3 DELETE 触发器
+
+DELETE 触发器在 DELETE 语句执行之前或之后执行。
+
+
+
+- 在DELETE触发器代码内，你可以引用一个名为OLD的虚拟表，访问被删除的行；
+- OLD中的值全都是只读的，不能更新。
+
+
+
+```mysql
+CREATE TRIGGER deleteorder  BEFOR DELETE ON orders 
+FOR EACH ROW 
+BEGIN 
+	INSERT INTO archive_orders (order_num,order_date,cust_id)
+	VALUES(OLD.order_num,OLD.order_date,OLD.cust_id);
+END;
+```
+
+
+
+注意：
+
+​	**多语句触发器**，正如所见，触发器deleteorder使用BEGIN和END语句标记触发器体。这在此例子中并不是必需的，不过也没有害处。使用BEGIN END块的好处是触发器能容纳多条SQL语句（在 BEGIN	END块中一条挨着一条）。
+
+
+
+
+
+### 11.2.4 UPDATE 触发器
+
+UPDAET 触发器在UPDAE语句执行之前或之后执行。
+
+- 在UPDATE触发器代码中，你可以引用一个名为OLD的虚拟表访问以前（UPDATE语句前的值），引用一个名为NEW的虚拟表访问新更新的值；
+- 在BEFORE UPDATE触发器中，NEW中的值可能也被更新（允许更改将要用于UPDATE语句中的值）；
+- OLD中的值全都是只读的，不能更新。
+
+
+
+```mysql
+CREATE TRIGGER updatevendor BEFORE UPDATE ON vendors FOR EACH ROW 
+SET NEW.vend_state = Upper(NEW.vend_state);
+```
+
+
+
+### 注意： 其他内容参考 《Mysql必知必会》 P186 第25章
+
+
+
+# 12.管理事务处理
+
+TODO 待续
+
+
+
