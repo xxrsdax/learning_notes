@@ -1170,6 +1170,19 @@ TTL 命令和PTTL命令接受一个带有生存时间或者过期时间的键，
 
 #### 2.1.4.2 设置过期时间
 
+Redis有四个不同的命令可以用于设置键的生存时间（键可以存在多久）或过期时间（键什么时候会被删除）：
+
+- EXPIRE  \<key\>  \<ttl\>  命令用于将键key的生存时间设置为 ttl 秒
+- PEXPIRE \<key\>  \<ttl\>  命令用于将键key的生存时间设置为 ttl毫秒
+- EXPIREAT \<key\>  \<timestamp> 命令用于将键key的过期时间设置为timestamp所指定的秒数时间戳
+- PEXPIREAT \<key\>  \<timestamp> 命令用于将键key的过期时间设置为timestamp所指定的毫秒数时间戳
+
+
+
+注意：虽然有多种命令，但几个命令都是使用 PEXPIREAT 命令来实现的，最后都会转换成 PEXPIREAT  命令
+
+
+
 
 
 TODO 待续 P271
