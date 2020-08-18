@@ -299,7 +299,7 @@ show CREATE procedure 存储过程名;
 show procedure status [ like  '存储过程名'  ]
 ```
 
-[]内容 若不存在就是查询全部存储过程的信息
+[] 中括号的内容 若不存在就是查询全部存储过程的信息
 
 
 
@@ -312,10 +312,6 @@ show procedure status [ like  '存储过程名'  ]
 # 10.游标
 
 Mysql游标 仅支持在 存储过程中使用，具体内容参考 《MySQL必知必会》 第24章 使用游标
-
-
-
-
 
 
 
@@ -463,6 +459,10 @@ SET NEW.vend_state = Upper(NEW.vend_state);
 
 
 # 12.管理事务处理
+
+
+
+
 
 TODO 待续
 
