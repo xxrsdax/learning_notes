@@ -460,7 +460,159 @@ SET NEW.vend_state = Upper(NEW.vend_state);
 
 # 12.管理事务处理
 
+## 12.1 概述
 
+```
+并非所有引擎都支持事务处理
+   MyISAM 和 InnoDB是两种最常使用的引擎。
+   前者不支持明确的事务处理管理，而后者支持。
+```
+
+事务处理（transaction processing）可以用来维护数据库的完整性，它保证成批的MySQL操作要么完全执行，要么完全不执行。
+
+- 事务（transaction）：指一组SQL语句。
+- 回退（rollback）:指撤销指定SQL语句的过程。
+- 提交（commit）：指将未存储的SQL语句结果写入数据库表
+- 保留点（savepoint）:指事务处理中设置的临时占位符（placeholder）,你可以对它发布回退（与回退整个事务处理不同）。
+
+
+
+## 12.2 控制事务处理
+
+
+
+### 12.2.1 开始事务
+
+START TRANSACTION;
+
+
+
+### 12.2.2 使用ROLLBACK
+
+ROLLBACK;
+
+
+
+```
+事务处理用来管理 INSERT、UPDATE、DELETE语句，但不能回退 CREATE 和 DROP 操作，事务处理块中可以使用这两条语句，但如果你执行回退，它们不会撤销
+```
+
+
+
+### 12.2.3 使用COMMIT
+
+COMMIT;
+
+
+
+
+
+### 12.2.4 使用保留点
+
+更复杂的事务处理可能需要部分提交或回退。
+
+为了支持回退部分事务处理，必须能在事务处理块中合适的位置放置占位符，这样，如果需要回退，可以回退到某个占位符。
+
+这些占位符称为保留点，为了创建占位符可以如下操作
+
+
+
+//设置保留点
+
+SAVEPOINT 保留点名称;
+
+//回退到指定保留点
+
+ROLLBACK TO 保留点名称;
+
+
+
+```
+保留点越多越好
+	因为保留点越多，你就可以越灵活的进行回退
+释放保留点
+	事务结束后，就可以自动释放。也可以用 RELEASE SAVEPOINT 明确地释放保留点。
+```
+
+
+
+
+
+### 12.2.5 更改默认的提交行为
+
+默认的MySQL行为是自动提交所有更改。
+
+可以指定为不自动提交。
+
+SET autocommit = 0;
+
+```
+autocommit 标志决定是否自动提交更改。
+标志位连接专用：
+	autocommit 标志是针对每个连接而不是服务器的。
+```
+
+
+
+
+
+
+
+# 13.全球化和本地化
+
+## 13.1 字符集和校对顺序
+
+MySQL需要适用不同的字符集（不同的字母和字符），适应不同的排序和检索数据的方法。
+
+- 字符集 ： 为字母和符号的集合；
+- 编码 ：为某个字符集成员的内部表示
+- 校对：为规定字符如何比较的指令。
+
+
+
+## 13.2 适用字符集和校对顺序
+
+//查看所支持的 字符集完整列表
+
+SHOW CHARACTER SET;
+
+
+
+//查看所支持校对的完整列表
+
+SHOW  COLLATION;
+
+
+
+//为了确定所用的字符集和校对
+
+SHOW  VARIABLES  LIKE 'character%';
+
+SHOW  VARIABLES  LIKE 'collaction%';
+
+
+
+//为了给表指定字符集合校对，可使用带子句的CREATE TABLE 
+
+CREATE  TABLE  mytable(
+
+​	column1  INT,
+
+​	column2  VARCHAR(10)
+
+) DEFAULT CHARACTER  SET hebrew  
+
+ COLLATE  hebrew_general_ci;
+
+
+
+这个例子中指定了 CHARACTER SET 和 COLLATE两者。一般，MySQL如下确定使什么样的字符集和校对。
+
+
+
+
+
+# 14.安全管理
 
 
 
