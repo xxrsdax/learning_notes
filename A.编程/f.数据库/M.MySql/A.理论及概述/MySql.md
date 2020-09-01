@@ -750,13 +750,13 @@ MySQL提供了一系列的语句，可以（应该）用来保证数据库正确
 
 
 
-//检查 表键是否正确
+1、检查 表键是否正确
 
 ANALYZE  TABLE 表名;
 
 
 
-//对表进行检查
+2、对表进行检查
 
 CHECK  TABLE  表名1,表名2;
 
@@ -771,13 +771,218 @@ QUICK 只进行快速扫描。
 
 
 
+3、如果MyISAM表访问产生不正确和不一致的结果，可能需要用REPAIR TABLE来修复相应的表。这条语句不应该经常使用，如果需要经常使用，可能会有更大的问题要解决。
+
+
+
+4、如果从一个表中删除大量数据，应该使用OPTIMIZE TABLE来收回所用的空间，从而优化表的性能。
+
  
 
 
 
+## 15.3 诊断启动问题
+
+服务器启动问题通常在对MySQL配置或服务器本身进行更改时出现。MySQL在这个问题发送时报告错误，但由于多数MySQL服务器是做为系统进程或服务自动启动的，这些消息可能看不到。
 
 
-TODO 待续
+
+在排除系统启动问题，首先尽量手动启动服务器。
+
+下面是几个重要的mysql命令行选项：
+
+-  --help 显示帮组------------ 一个选项列表；
+-  --safe-mode装载减去某些最佳配置的服务器；
+-  --verbose 显示全文本消息（为获得更详细的帮组消息与 --help 联合使用）；
+-  --version 显示版本信息然后退出。
 
 
+
+## 15.4 查看日志文件
+
+- 错误日志。包含启动和关闭问题以及任意关键错误的细节。名为 hostname.err,位于 data目录中。
+
+    ​                  可以用  --log--error 命令行选项更改。
+
+- 查询日志。记录所有MySQL活动， 名为 hostname.log,位于data目录中。此名字可以用 --log命令行选项更改。
+
+- 二进制日志。它记录更新过数据的所有语句。名为 hostname-bin.位于 data目录内。
+
+- 缓查询日志。记录执行缓慢的任何查询。名为 hostname-slow.log，位于data目录中。
+
+
+
+使用日志时，可用 FLUSH  LOGS 语句来刷新和重新开始所有日志文件。
+
+
+
+
+
+
+
+# 16.改善性能 
+
+## 16.1 改善性能
+
+- 一段时间后，你可能需要调整内存分配、缓冲区大小等。
+- MySQL是一个多用户多线程的DBMS,如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。
+    - 如果你遇到显著的性能不良，可使用 SHOW   PROCESSLIST 显示所有活动进程（以及它们的线程ID和执行时间）。你可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）
+- 应该验证 联结、并、子查询等，找出最佳的方法。
+- 使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。
+
+![image-20200901224505968](img/image-20200901224505968.png)
+
+
+
+简单的说 注意查询的内容多少  注意索引的创建和删除
+
+
+
+
+
+# 17.语法
+
+![image-20200901225129055](img/image-20200901225129055.png)
+
+
+
+## 1.更新表
+
+ALTER TABLE 表名 (
+
+​	ADD  列名  数据类型  [NULL| NOT NULL]   [约束]，
+
+​	CHANG  column  columns     数据类型  [NULL| NOT NULL]   [约束]，
+
+​	DROP   column,
+
+​	...
+
+);
+
+
+
+## 2.创建索引
+
+CREATE INDEX  索引名
+
+ON  表名 ( 列表[ASC|DESC] , ... );
+
+
+
+## 3.创建存储过程
+
+CREATE  PROCEDURE  存储过程名 ( [parameters] )
+
+BEGIN 
+
+...
+
+END;
+
+
+
+## 4.创建表
+
+CREATE TABLE 表名(
+
+​	列名  属性名   [null|not null]  [约束]，
+
+​	...
+
+);
+
+
+
+## 5.创建用户
+
+CREATE  USER 用户名 [@hostname]
+
+[IDENTIFIED  BY  [PASSWORD]  'password'];
+
+
+
+
+
+## 6.创建视图
+
+CREATE   [OR  REPLACE] VIEW 视图名称
+
+AS 
+
+SELECT  ...;
+
+
+
+## 7.删除
+
+DROP   DATABASE|INDEX|PROCEDURE|TABLE|TRIGGER|USER|VIEW    名称；
+
+
+
+## 8.INSERT
+
+INSERT  INTO 表名 (字段名...)   VALUES (值...)
+
+
+
+## 9.INSERT SELECT
+
+INSERT  INTO 表名  [(字段名...)]
+
+SELECT 字段名... FROM  表名,...
+
+[WHERE  ...] 
+
+
+
+## 10.SELECT
+
+SELECT 字段名  ...
+
+FROM 表名
+
+[WHERE  ...]
+
+[UNION ...]
+
+[GROUP BY ...]
+
+[HAVING ...]
+
+[ORDER BY ...]
+
+
+
+## 11.UPDATE
+
+UPDATE 表名
+
+SET 字段名=值  ...
+
+[WHERE ...]
+
+
+
+## 12.DELETE
+
+DELETE FROM 表名
+
+[WHERE  ...]
+
+
+
+
+
+# 18.数据类型
+
+![image-20200901231316099](img/image-20200901231316099.png)
+
+
+
+
+
+![image-20200901231326908](img/image-20200901231326908.png)
+
+![image-20200901231401474](img/image-20200901231401474.png)
 
