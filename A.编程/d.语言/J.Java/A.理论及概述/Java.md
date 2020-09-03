@@ -183,9 +183,122 @@ Arrays.sort( strings, (x,y)-> x.compareToIgnoreCase(y));
 
 ## 1.5 构造器引用
 
+构造器引用和方法引用类似，只不过方法名为new。
 
 
-P237
+
+例如：
+
+​	Person::new    //具体调用Person的那个构造器，取决于上下文环境。
+
+​	
+
+例如：
+
+ArrayList\<String\>  names = ...;
+
+Stream\<Person\> stream = names.stream().map(Person::new);
+
+List\<Person\>    people = stream.collect(Collectors.toList());
+
+
+
+//如果Person有多个构造器，会从上下文推断选择那个，这里会选择有一个String参数的构造器。
+
+//因为它从上下文推导出这是在对一个字符串调用构造器。
+
+
+
+
+
+## 1.6  变量作用域
+
+你可能希望能够在lambda表达式中访问外围方法或类中的变量。
+
+1.在lambda表达式中，只能引用值不会改变的变量。（lambda表达式中捕获的变量必须实际上是最终变量（effectively  final））。
+
+例如：
+
+​	String 本身就是不会改变的变量  所以可以直接引用。
+
+​	可以改变的变量必须定义为 final类型
+
+
+
+2.lambda表达式不能有同名的局部变量。
+
+​	所以lambda表达式的参数名，和lambda内定义的变量  不能和外部变量重名。
+
+
+
+3.在一个lambda表达式中使用this关键字时，是指创建这个lambda表达式的方法的this参数。
+
+
+
+
+
+## 1.7处理lambda表达式
+
+使用lambda表达式的重点是延迟执行（deferred execution）.
+
+之所以希望以后再执行代码，这有很多原因。
+
+- 在一次单独的线程中运行代码
+- 多次运行代码
+- 在算法的适当位置运行代码
+- 发生某种情况时执行代码。
+- 只在必要时才运行代码。
+
+
+
+常用函数式接口
+
+| 函数式接口          | 参数类型 | 返回类型 | 抽象方法名 | 描述                         | 其他方法                 |
+| ------------------- | -------- | -------- | ---------- | ---------------------------- | ------------------------ |
+| Runnable            | 无       | void     | run        | 作为无参数或返回值的动作运行 |                          |
+| Supplier\<T\>       | 无       | T        | get        | 提供一个T类型的值            |                          |
+| Consumer\<T\>       | T        | void     | accept     | 处理一个T类型的值            | andThen                  |
+| BiConsumer<T,U>     | T,U      | void     | accept     | 处理T和U类型的值             | andThen                  |
+| Function<T,R>       | T        | R        | apply      | 有一个T类型参数的函数        | compose,andThen,identity |
+| BiFunction\<T,U,R\> | T,U      | R        | apply      | 有T和U类型参数的函数         | andThen                  |
+| UnaryOperator\<T\>  | T        | T        | apply      | 类型T上的一元操作符          | compose,andThen,identity |
+| BinaryOperator\<T\> | T,T      | T        | apply      | 类型T上的二元操作符          | andThen，maxBy,minBy     |
+| Predicate\<T\>      | T        | boolean  | test       | 布尔值函数                   | and，or,negate,isEqual   |
+| BiPredicate<T,U>    | T,U      | boolean  | test       | 有两个参数的布尔值函数       | and,or,negate            |
+
+
+
+基本类型的函数式接口
+
+| 函数式接口           | 参数类型 | 返回类型 | 抽象方法名   |
+| -------------------- | -------- | -------- | ------------ |
+| BooelanSupplier      | none     | boolean  | getAsBoolean |
+| PSupplier            | none     | p        | getAsP       |
+| PConsumer            | p        | void     | accept       |
+| ObjPConsumer\<T\>    | T,p      | void     | accept       |
+| PFunction\<T\>       | p        | T        | apply        |
+| PToQFunction         | p        | q        | applyAsQ     |
+| ToPFunction\<T\>     | T        | p        | applyAsP     |
+| ToPBiFunction\<T,U\> | T,U      | p        | applyAsP     |
+| PUnaryOperator       | p        | p        | applyAsP     |
+| PBinaryOperator      | p,p      | p        | applyAsP     |
+| PPredicate           | p        | boolean  | test         |
+
+注意：
+
+​	p、q 为 int,long,double   ;
+
+​    P、Q 为 Int、Long、Double;
+
+
+
+注意：若果设计自己的函数式接口，记得加上@FunctionalInterface注解（不是必须的）  
+
+
+
+
+
+
 
 TODO  待续
 
