@@ -4,13 +4,14 @@
 		<!--  背景图片	-->
 		<image class="image-bg" src="../../static/a.png" />
 
+		<!-- 控制按钮与页面的高度 -->
 		<view :style="heightStyle">
-
 		</view>
 
 		<view style="padding:0rpx 48rpx;margin-bottom: 40rpx;">
-			<button :class="buttonStyle">手机号登陆</button>
+			<button type="default" :class="buttonStyle" @click="login">手机号登陆</button>
 		</view>
+		
 		<view style="padding:0rpx 48rpx;">
 			<button type="default" style="border-radius: 120rpx;border: 1rpx solid red;background-color: #FFFFFF;color:red;font-size: 34rpx;">注册</button>
 		</view>
@@ -27,13 +28,19 @@
 				heightStyle: {
 					paddingTop: "100rpx"
 				},
-				buttonStyle:"buttonClassOut"
+				buttonStyle: "buttonClassOut"
 			}
 		},
 		methods: {
-
-
-
+			//登录 
+			login: function() {
+				alert("s");
+				console.log("页面跳转")
+				uni.switchTab({
+				    url: '/pages/tabBar/findMusic/findMusic'
+				});
+				
+			}
 		},
 		mounted() {
 			//获取当前手机屏幕尺寸
@@ -74,21 +81,20 @@
 	}
 
 	/* 鼠标在按钮外样式 */
-	buttonClassOut {
+	.buttonClassOut {
 		border-radius: 120rpx;
 		border: 1rpx solid red;
 		background-color: #FFFFFF;
 		color: red;
 		font-size: 34rpx;
 	}
-	
+
 	/* 鼠标在按钮内样式 */
-	buttonClassIn {
+	.buttonClassIn {
 		border-radius: 120rpx;
 		border: 1rpx solid red;
 		background-color: red;
-		color:#FFFFFF;
+		color: #FFFFFF;
 		font-size: 34rpx;
 	}
-	
 </style>
