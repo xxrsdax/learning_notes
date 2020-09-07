@@ -540,9 +540,47 @@ Optional\<T\> 类型被当作一种更安全的方式，用来替代类型T的�
 
 
 
+### 2.7.1使用Optional值
+
+//orElse 使用某种默认值
+
+String  result  =  optionalString.orElse("");
 
 
-P11 未完待续。
+
+//orElseGet 计算默认值
+
+String  result = optionalString.orElseGet(()->Locale.getDefault().getDisplayName()); 
+
+
+
+//orElseThrow 或者可以在没有任何值时抛出异常
+
+String  result  = optionalString.orElseThrow(IllegalStateException::new);
+
+
+
+//ifPresent  方法会接收一个函数，如果该可选值存在，那么它会被传递给该函数。否则，不会发生任何事情。
+
+optionalValue.ifPresent(results::add)
+
+注意：调用 ifPresent 不会有任何返回值，如果想处理函数结果，应该使用map。
+
+
+
+//map  方法会接收一个函数，如果该可选值存在，那么它会被传递给该函数。否则，不会发生任何事情。且具有返回值
+
+Optional\<Boolean\>   added = optionalValue.map(results::add)
+
+注意：在optionalValue存在的情況下包装在Optional中的true或者false，以及在optionalValue不存在的情况下的空Optional。
+
+
+
+
+
+### 2.7.2 不适合使用Optional值的方式
+
+P12 待续
 
 
 
@@ -660,6 +698,25 @@ P11 未完待续。
 - boolean  allMatch( Predicate\< ?  super T\>  predicate)
 - boolean  noneMatch( Predicate\< ?  super T\>  predicate)
     - 分别在这个流中任意元素、所有元素和没有任何元素匹配给定断言时返回true。这些操作都是终结操作。
+
+
+
+
+
+### 2.?.4 Optional 
+
+**java.until.Optional 8**
+
+- T  orElse(T  other)
+    - 产生这个Optional的值，或者在该Optional为空时，产生other。
+- T  orElseGet(Supplier\<?  extends  T\>  other)
+    - 产生这个Optional的值，或者在该Optional为空时，产生调用other的结果。
+- \<X  extends  Throwable\>  T  orElseThrow(Supplier\<?  extends X> exceptionSupplier)
+    - 产生这个Optional的值，或者在该Optional为空时，抛出调用exceptionSupplier的结果。
+- void ifPresent(Consumber\<?  supper  T\>  consumer)
+    - 如果该Optional不为空，那么就将它的值传给consumer
+- \<U\>  Optional\<U\>  map(Function\<? super T,? extends U\>  mapper)
+    - 产生将该Optional的值传递给mapper后的结果，只要这个Optional不为空且结果不为null，否则产生一个空的Optional
 
 
 
