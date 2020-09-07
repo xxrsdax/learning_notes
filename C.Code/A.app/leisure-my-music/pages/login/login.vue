@@ -4,13 +4,14 @@
 		<!--  背景图片	-->
 		<image class="image-bg" src="../../static/a.png" />
 
+		<!-- 控制按钮与页面的高度 -->
 		<view :style="heightStyle">
-
 		</view>
 
-		<view style="padding:0rpx 48rpx;margin-bottom: 40rpx;">
-			<button :class="[{'buttonClassOut' : flag.login },{'buttonClassIn': !flag.register}]">手机号登陆</button>
+		<view style="padding:0rpx 48rpx;margin-bottom: 40rpx;"> 
+			<button type="default" :class="buttonStyle" @click="login">手机号登陆</button>
 		</view>
+		
 		<view style="padding:0rpx 48rpx;">
 			<button :class="[{'buttonClassOut' : flag.register },{'buttonClassIn': !flag.register}]">注册</button>
 		</view>
@@ -37,8 +38,20 @@
 			}
 		},
 		methods: {
-
-
+ 
+				buttonStyle: "buttonClassOut"
+			}
+		},
+		methods: {
+			//登录 
+			login: function() {
+				alert("s");
+				console.log("页面跳转")
+				uni.switchTab({
+				    url: '/pages/tabBar/findMusic/findMusic'
+				});
+				
+			}
 		},
 		mounted() {
 			//获取当前手机屏幕尺寸
