@@ -9,10 +9,10 @@
 		</view>
 
 		<view style="padding:0rpx 48rpx;margin-bottom: 40rpx;">
-			<button :class="buttonStyle">手机号登陆</button>
+			<button :class="[{'buttonClassOut' : flag.login },{'buttonClassIn': !flag.register}]">手机号登陆</button>
 		</view>
 		<view style="padding:0rpx 48rpx;">
-			<button type="default" style="border-radius: 120rpx;border: 1rpx solid red;background-color: #FFFFFF;color:red;font-size: 34rpx;">注册</button>
+			<button :class="[{'buttonClassOut' : flag.register },{'buttonClassIn': !flag.register}]">注册</button>
 		</view>
 
 	</view>
@@ -20,18 +20,23 @@
 
 <script>
 	export default {
-
 		data() {
 			return {
-				title: 'Hello2',
+				//高度样式
 				heightStyle: {
 					paddingTop: "100rpx"
 				},
-				buttonStyle:"buttonClassOut"
+				//样式标识
+				flag: {
+					//登录按钮
+					login: true,
+					//注册按钮
+					register: true
+				}
+
 			}
 		},
 		methods: {
-
 
 
 		},
@@ -49,7 +54,6 @@
 			let buttonClass = document.querySelectorAll(".buttonClass");
 
 			this.heightStyle.paddingTop = (windowHeight / 5) * 4 + "rpx";
-
 			// buttonClass.forEach((item)=>{
 			// 	// item.style.marginTop = "100rpx"
 			// }) 
@@ -74,21 +78,20 @@
 	}
 
 	/* 鼠标在按钮外样式 */
-	buttonClassOut {
+	.buttonClassOut {
 		border-radius: 120rpx;
 		border: 1rpx solid red;
 		background-color: #FFFFFF;
 		color: red;
 		font-size: 34rpx;
 	}
-	
+
 	/* 鼠标在按钮内样式 */
-	buttonClassIn {
+	.buttonClassIn {
 		border-radius: 120rpx;
 		border: 1rpx solid red;
 		background-color: red;
-		color:#FFFFFF;
+		color: #FFFFFF;
 		font-size: 34rpx;
 	}
-	
 </style>
