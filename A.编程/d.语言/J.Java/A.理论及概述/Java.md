@@ -614,7 +614,7 @@ P<15> 具体内容看此页 《Java核心技术 卷II》
 
 
 
-## 2.8 收集结果
+## 2.8 收集结果-collection
 
 当处理完流之后，通常会 **遍历查看元素** 或 **将结果收集到数据结构**中
 
@@ -630,13 +630,59 @@ P<15> 具体内容看此页 《Java核心技术 卷II》
     - 向toArray中传递指定类型的数组构造器，就可以获得指定类型的数组，否则返回 Object类型数组
 - 调用Collect
     - 它会接收一个Collector接口的实例，Collectors类提供了大量用于生成Collector的工厂方法。
-    - 
+    - List\<String> list = stream.collect(Collectors.toList());
+    - Set\<String> list = stream.collect(Collectors.toSet());
+        - 转化为list或set
+    - TreeSet\<String> tree = stream.collect(Collectors.toCollection(TreeSet::new))
+        - 转换成指定类型
+    - String result  = stream.collect(Collectors.joining());
+    - String result  = stream.collect(Collectors.joining(","));
+        - 拼接流中所有字符串（可以指定分隔符）
+    - IntSummaryStatistics summary = stream.collect(Collectors.summarizingInt(String::length));
+        - double  ave = summary.getAverage();
+        - double  max= summary.getMax();
 
 
 
-P16待续
+## 2.9 收集到映射表-Map
+
+假设我们有一个Stream\<Person\>，并且想要将其元素收集到一个映射表中，这样后续就可以通过他们的ID来查找人员了，
+
+Collectors.toMap() 方法，可以产生映射表。
+
+- Map\<Integer,Person>	idToName = people.collect(Collectors.toMap(Person::getId,Person::getName));
+    - 此处调用 toMap方法，将Person的id转换为键，Person的name转化为值
+- Map\<Integer,Person>	idToPerson = people.collect(Collectors.toMap(Person::getId,Function.identity()));
+    - 第二个函数可以使用Function.identity()  这个样 值保存的内容就是Person的自身
+- Stream\<Locale>  locales  = Stream.of(Locale.getAvailableLocales());
+- Map\<String,String> languageNames = locales.collect(Collectors.toMap(Locale::getDisplayLanguage, l ->  l.getDisplayLanguage(l) , (existingValue,newValue) -> existingValue ));
+    - 多个元素可能会存在相同的键，那么就会存在冲突，收集器将会抛出一个IllegalStateException对象。可以通过提供第3个函数引元来覆盖这中行为，该函数会针对给定的已有值和新值来解决冲突并确定键对应的值。
+- Map\<Integer,Person> idToPerson = people.collect(Collectors.toMap(Person::getId,Function.identity(),(existingValue,newValue)->{throw new IllegalStateException();},TreeMap::new));
+    - 如果想要获得指定类型的Map，需要将指定map的构造器做为参数传入。
 
 
+
+
+
+## 2.10 群组和分区
+
+可以使用分组函数，对流中元素进行分组。
+
+- Map\<String,List\<Locale>> map  = locales.collect(Collectors.groupingBy(Locale::getCountry));
+
+    - 根据指定内容进行分组，此处根据 getCountry值做键，将相同内容存到list
+
+- Map\<Boolean,List\<Locale>>  englishAndOtherLocales  = locales.collect(
+
+    ​    Collectors.partitiongBy( l -> l.getLanguage().equals("en"))
+
+    );
+
+    - 当分类函数是断言函数时(即返回Boolean值的函数)，可以使用 partitioningBy 比较高效。
+
+    
+
+    
 
 
 
@@ -824,7 +870,7 @@ P16待续
 
 
 
-### 2.?.5 操作流-收集结果
+### 2.?.5 收集结果-Collection
 
 **java.util.stream.BaseStream 8**
 
@@ -877,6 +923,33 @@ P16待续
     - (int|long|double)  getMax()
     - (int|long|double)  getMin()
         - 产生汇总后打的元素的最大值和最小值，或者在没有任何元素时，产生（Integer|Long|Double).(MAX|MIN)_VALUE。
+
+
+
+
+
+### 2.?.6 收集结果-Map
+
+
+
+**java.util.stream.Collecttor 8**
+
+- static\<T,K,U> Collector\<T,?,Map\<K,U>> toMap(参数略)
+- static<T,K,U> Collector\<T,?,ConcurrentMap\<K,U>> toConcurrentMap(参数略)
+    - 产生一个收集器，它会产生一个映射表或者并发映射表。
+    - 具体内容参考原文 P<23> 《Java核心技术 卷II》
+
+
+
+### 2.?.7 分组
+
+**java.util.stream.Collecttor 8**
+
+- static\<T,K> Collector\<T,?Map<K,List\<T>>> groupingBy(Function\<? super T,? extends K> classifier)
+- static\<T,K> Collector\<T,?Map<K,List\<T>>> groupingByConcurrent(Function\<? super T,? extends K> classifier)
+    - 产生一个收集器，它会产生一个映射表或并发映射表，其键是将classifier应用于所有收集到的元素上所产生的结果，值是由具有相同键的元素构成的一个个列表。
+- static\<T,K> Collector\<T,?Map<Boolean,List\<T>>>  partitioningBy(Predicate\<? super T,? extends K> predicate)
+    - 产生一个收集器，它会产生一个映射表，其键是true/false，而值是由满足/不满足断言的元素构成的列表。
 
 
 
