@@ -24,7 +24,7 @@ lamba表达式是一个可传递的代码块，可以在以后执行一次或多
 
 案例一：
 
-​	//String strArray = []
+	//String strArray = []
 
 Arrays.sort(strArray,(first,second)->first.length-second.length );
 
@@ -40,7 +40,7 @@ time.start();
 
 注意：如果一个lambda表达式只在某些分支返回一个值，而在另外一些分支不返回值，这是不合法的。
 
-​		例如 (int x) -> { if(x>= 0 ) return 1; }
+		例如 (int x) -> { if(x>= 0 ) return 1; }
 
 
 
@@ -103,9 +103,9 @@ ArrayList类有一个removeIf方法，它的参数就是一个Predicate。
 
 例如：
 
-​	System.out::println      x->System.out.println(x)
-
-​	Math::pow    				(x,y)->Math.pow(x,y)
+	System.out::println      x->System.out.println(x)
+	
+	Math::pow    				(x,y)->Math.pow(x,y)
 
 
 
@@ -157,15 +157,15 @@ Arrays.sort( strings, (x,y)-> x.compareToIgnoreCase(y));
 
 注意：
 
-​	如果有多个重载方法，编译器就会尝试从上下文中找出你指的哪一个方法。
-
-​	例如：
-
-​		Math.max 方法有两个版本，一个用于整数，另一个用于double值。选择哪一个版本取决于 Math::max 转
-
-​		换为哪个函数式接口的方法参数。 
-
-​	类似于lambda表达式，方法引用不能独立存在，总是会转换为函数式接口的实例。
+	如果有多个重载方法，编译器就会尝试从上下文中找出你指的哪一个方法。
+	
+	例如：
+	
+		Math.max 方法有两个版本，一个用于整数，另一个用于double值。选择哪一个版本取决于 Math::max 转
+	
+		换为哪个函数式接口的方法参数。 
+	
+	类似于lambda表达式，方法引用不能独立存在，总是会转换为函数式接口的实例。
 
 
 
@@ -189,7 +189,8 @@ Arrays.sort( strings, (x,y)-> x.compareToIgnoreCase(y));
 
 例如：
 
-​	Person::new    //具体调用Person的那个构造器，取决于上下文环境。
+	Person::new    //具体调用Person的那个构造器，取决于上下文环境。
+
 
 ​	
 
@@ -219,15 +220,15 @@ List\<Person\>    people = stream.collect(Collectors.toList());
 
 例如：
 
-​	String 本身就是不会改变的变量  所以可以直接引用。
-
-​	可以改变的变量必须定义为 final类型
+	String 本身就是不会改变的变量  所以可以直接引用。
+	
+	可以改变的变量必须定义为 final类型
 
 
 
 2.lambda表达式不能有同名的局部变量。
 
-​	所以lambda表达式的参数名，和lambda内定义的变量  不能和外部变量重名。
+	所以lambda表达式的参数名，和lambda内定义的变量  不能和外部变量重名。
 
 
 
@@ -286,9 +287,9 @@ List\<Person\>    people = stream.collect(Collectors.toList());
 
 注意：
 
-​	p、q 为 int,long,double   ;
-
-​    P、Q 为 Int、Long、Double;
+	p、q 为 int,long,double   ;
+	
+	P、Q 为 Int、Long、Double;
 
 
 
@@ -342,9 +343,9 @@ List\<Person\>    people = stream.collect(Collectors.toList());
 
 例如：
 
-​	List\<String\> wordList = ...;
-
-​	Stream\<String\> longWords = wordList.stream().filter(w -> w.length() > 12);
+	List\<String\> wordList = ...;
+	
+	Stream\<String\> longWords = wordList.stream().filter(w -> w.length() > 12);
 
 **filter的引元是Predicate\<T\>,即从T到boolean的函数。**
 
@@ -356,9 +357,9 @@ List\<Person\>    people = stream.collect(Collectors.toList());
 
 例如：
 
-​	我们可以像下面这样将所有单词都转换为小写：
-
-​	Stream\<String\>  lowercaseWords = words.stream().map(String::toLowerCase);
+	我们可以像下面这样将所有单词都转换为小写：
+	
+	Stream\<String\>  lowercaseWords = words.stream().map(String::toLowerCase);
 
 
 
@@ -402,7 +403,7 @@ Stream\<String\>  flatResult = words.stream().flatMap(w->letters(w));
 
 例如：
 
-​	Stream\<Double\>  randoms  =  Stream.generate(Math::random).limit(100);
+	Stream\<Double\>  randoms  =  Stream.generate(Math::random).limit(100);
 
 
 
@@ -410,7 +411,7 @@ Stream\<String\>  flatResult = words.stream().flatMap(w->letters(w));
 
 例如：
 
-​	Stream\<String\>  words =  Stream.of(contents.split("\\\PL+")).skip(1);
+	Stream\<String\>  words =  Stream.of(contents.split("\\\PL+")).skip(1);
 
 
 
@@ -420,7 +421,7 @@ Stream\<String\>  flatResult = words.stream().flatMap(w->letters(w));
 
 例如:
 
-​	Stream\<String\> combined = Stream.concat( letters("Hello") , letters("World"));
+	Stream\<String\> combined = Stream.concat( letters("Hello") , letters("World"));
 
 当然，第一个流不应该是无限的，否则第二个流永远都不会得到处理的机会。	
 
@@ -434,7 +435,7 @@ distinct方法会返回一个流，它的元素是从原有流中产生的，即
 
 例如：
 
-​	Stream\<String\>  uniqueWords  =  Stream.of("merrily","merrily","gently").distinct();
+	Stream\<String\>  uniqueWords  =  Stream.of("merrily","merrily","gently").distinct();
 
 
 
@@ -444,7 +445,7 @@ distinct方法会返回一个流，它的元素是从原有流中产生的，即
 
 例如：
 
-​	Stream\<String\>  longestFirst  =  words.stream().sorted(Comparator.comparing(String::length).reversed());
+	Stream\<String\>  longestFirst  =  words.stream().sorted(Comparator.comparing(String::length).reversed());
 
 
 
@@ -454,11 +455,11 @@ peek方法会产生另一个流，它的元素与原来流中的元素相同，�
 
 Object[]  powers  =  
 
-​		Steram.iterate(1.0, p -> p * 2).peek( e -> System.out.println("Fetching"+e)).limit(20).toArray()
+		Steram.iterate(1.0, p -> p * 2).peek( e -> System.out.println("Fetching"+e)).limit(20).toArray()
 
 当实际访问一个元素时，就会打印出来一条消息。通过这种方式，你可以验证 iterate 返回的无限流是被惰性处理的。
 
-​	对于调式，你可以让peek调用一个你设置了断点的方法。
+	对于调式，你可以让peek调用一个你设置了断点的方法。
 
 
 
@@ -478,9 +479,9 @@ min最小值
 
 例如：
 
-​	Optional\<String\>   largest = words.max(String::compareToIgnoreCase);
-
-​	System.out.println("largest"+largest.orElse(""));
+	Optional\<String\>   largest = words.max(String::compareToIgnoreCase);
+	
+	System.out.println("largest"+largest.orElse(""));
 
 
 
@@ -490,7 +491,7 @@ findFirst 返回的是非空集合中的第一个值。通常与filter组合使�
 
 例如：
 
-​	Optional\<String\>  startsWithQ  = words.filter( s -> s.startsWith("Q")).findFirst();
+	Optional\<String\>  startsWithQ  = words.filter( s -> s.startsWith("Q")).findFirst();
 
 
 
@@ -498,7 +499,7 @@ findAny 匹配任意的匹配。
 
 例如：
 
-​	Optional\<String\>  startsWithQ  = words.parallel().filter( s -> s.startsWith("Q")).findAny ();
+	Optional\<String\>  startsWithQ  = words.parallel().filter( s -> s.startsWith("Q")).findAny ();
 
 
 
@@ -506,7 +507,7 @@ anyMatch 判断是否存在匹配。
 
 例如：
 
-​	boolean  aWordStartsWithQ = words.parallel().anyMatch ( s -> s.startsWith("Q"));
+	boolean  aWordStartsWithQ = words.parallel().anyMatch ( s -> s.startsWith("Q"));
 
 
 
@@ -514,7 +515,7 @@ allMatch 判断是否全部匹配。
 
 例如：
 
-​	boolean  aWordStartsWithQ = words.parallel().allMatch( s -> s.startsWith("Q"));
+	boolean  aWordStartsWithQ = words.parallel().allMatch( s -> s.startsWith("Q"));
 
 
 
@@ -522,7 +523,7 @@ noneMatch 判断是否全不部匹配。
 
 例如：
 
-​	boolean  aWordStartsWithQ = words.parallel().noneMatch ( s -> s.startsWith("Q"));
+	boolean  aWordStartsWithQ = words.parallel().noneMatch ( s -> s.startsWith("Q"));
 
 
 
@@ -580,7 +581,84 @@ Optional\<Boolean\>   added = optionalValue.map(results::add)
 
 ### 2.7.2 不适合使用Optional值的方式
 
-P12 待续
+没有正确地使用Optional的值，那么相比较以往的得到“某物或null”的方法，你并没有得到任何好处。
+
+
+
+### 2.7.3创建Optional
+
+前文中都是描述，使用其他类的方法创建Optional对象，Optional类自身也提供了许多方法用于创建Optional对象。
+
+- Optional.of(result)
+- Optional.empty()
+- Optional.ofNullable(result)   
+    - ofNullable在result不为空时调用of,为空时调用 empty
+
+
+
+
+
+### 2.7.4用flatMap来构建Optional值的函数
+
+假设你有一个可以产生Optional\<T>  对象的方法f,并且目标类型T具有一个可以产生Optional\<U>对象的方法g。
+
+如果他们是普通的方法，那么你可以通过 s.f().g()来将它们组合起来。但是这种组合没法工作，因为 s.f() 的类型为Optional\<T> ,而不是T.
+
+因此，需要调用：
+
+​	Optional\<U> result  =  s.f().flatMap(T::g);
+
+
+
+P<15> 具体内容看此页 《Java核心技术 卷II》
+
+
+
+## 2.8 收集结果
+
+当处理完流之后，通常会 **遍历查看元素** 或 **将结果收集到数据结构**中
+
+- 调用iteractor方法
+- 调用forEach方法
+    - stream.forEach(System.out::println) 
+    - 在并行流上，forEach会任意顺序遍历元素
+- 调用forEachOrdered方法
+    - 在并行流上，会按照流中的顺序遍历元素，但会丧失并行流的优势。
+- 调用toArray
+    - Object[] result = stream.toArray()
+    - String[] result = stream.toArray(String[]::new)
+    - 向toArray中传递指定类型的数组构造器，就可以获得指定类型的数组，否则返回 Object类型数组
+- 调用Collect
+    - 它会接收一个Collector接口的实例，Collectors类提供了大量用于生成Collector的工厂方法。
+    - 
+
+
+
+P16待续
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -701,11 +779,12 @@ P12 待续
 
 
 
-
-
 ### 2.?.4 Optional 
 
-**java.until.Optional 8**
+#### **java.until.Optional 8**
+
+- T  get()
+    - 产生这个Optional的值，或者在该Optional为空时，抛出一个NoSuchElementException对象
 
 - T  orElse(T  other)
     - 产生这个Optional的值，或者在该Optional为空时，产生other。
@@ -717,6 +796,87 @@ P12 待续
     - 如果该Optional不为空，那么就将它的值传给consumer
 - \<U\>  Optional\<U\>  map(Function\<? super T,? extends U\>  mapper)
     - 产生将该Optional的值传递给mapper后的结果，只要这个Optional不为空且结果不为null，否则产生一个空的Optional
+- boolean  isPresent()
+    - 如果该Optional不为空，则返回true。
+
+
+
+
+
+#### **java.util.Optional 8** (创建)
+
+- static\<T\>  Optional\<T\>   of(T value)
+- static\<T\>  Optional\<T\>    ofNullable(T value)
+    - 产生一个具有给定值的Optional。如果value为null,那么第一方法会抛出一个NullPointerException对象，而第二个方法会产生一个空Optional。
+- static\<T\>  Optional\<T\>    empty()
+    - 产生一个空的Optional。
+
+
+
+#### **java.util.Optional 8** 
+
+- \<U\>  Optional\<U\>   flatMap(Function\<? super T,Optional\<U\>\>  mapper )
+    - 产生将mapper应用于当前的Optional值所产生的结果，或者在当前Optional为空时，返回一个空的Optional
+
+
+
+
+
+
+
+### 2.?.5 操作流-收集结果
+
+**java.util.stream.BaseStream 8**
+
+- Iterator\<T>	iteator()
+    - 产生一个用获取当前流中各个元素的迭代器。这是一种终结操作。
+
+
+
+**java.util.stream.Collectores 8**
+
+- static  \<T>  Collector\<T,?,List\<T>>	toList()
+
+- static  \<T>  Collector\<T,?,Set\<T>>	 toSet()
+
+    - 产生一个将元素收集到列表或集中的收集器。
+
+- static  \<T,C  extends  Collection\<T>>  Collector\<T,?,C>	 toCollection(Supplier\<C>  collectionFactory)
+
+    - 产生一个将元素收集到任意集合中的收集器，可以传递一个诸如 TreeSet::new的构造器引用。
+
+- static  Collector\<CharSequence , ? , String>   joining()
+
+- static  Collector\<CharSequence , ? , String>   joining(CharSequence  delimiter)
+
+- static  Collector\<CharSequence , ? , String>   joining(CharSequence  delimiter,CharSequence prefix,CharSequence suffix)
+
+    - 产生一个字符串的收集器。分隔符会置于字符串之间，而第一个字符串之前可以有前缀，最后一个字符串之后可以有后缀。如果没有指定那么它们都为空。	
+
+- static \<T>  Collector\<T, ? , IntSummaryStatistics>   summarizingInt(ToIntFunction\<? super T>  mapper)
+
+- static \<T>  Collector\<T, ? , LongSummaryStatistics>   summarizingLong(ToLongFunction\<? super T>  mapper)
+
+- static \<T>  Collector\<T, ? , DoubleSummaryStatistics>   summarizingDouble(ToDoubleFunction\<? super T>  mapper)
+
+    - 产生能够生产 （Int|Long|Double） SummaryStatistics对象的收集器，通过它可以获得将mapper应用于每个元素后所产生的结果的个数、总和、平均值、最大值和最小值。
+
+    
+
+    **IntSummaryStatistics**
+
+    **LongSummaryStatistics**
+
+    **DoubleSummaryStatistics**
+
+    - long  getCount()
+        - 产生汇总后的元素的个数
+    - (int|long|double)   getSum()
+    - double  getAverage()
+        - 产生汇总后的元素的总和或平均值，或者在没有任何元素时返回0.
+    - (int|long|double)  getMax()
+    - (int|long|double)  getMin()
+        - 产生汇总后打的元素的最大值和最小值，或者在没有任何元素时，产生（Integer|Long|Double).(MAX|MIN)_VALUE。
 
 
 
