@@ -453,9 +453,7 @@ distinct方法会返回一个流，它的元素是从原有流中产生的，即
 
 peek方法会产生另一个流，它的元素与原来流中的元素相同，但是在每次获取一个元素时，都会调用一个函数。
 
-Object[]  powers  =  
-
-		Steram.iterate(1.0, p -> p * 2).peek( e -> System.out.println("Fetching"+e)).limit(20).toArray()
+	Object[]  powers  =  	Steram.iterate(1.0, p -> p * 2).peek( e -> System.out.println("Fetching"+e)).limit(20).toArray()
 
 当实际访问一个元素时，就会打印出来一条消息。通过这种方式，你可以验证 iterate 返回的无限流是被惰性处理的。
 
@@ -479,9 +477,10 @@ min最小值
 
 例如：
 
-	Optional\<String\>   largest = words.max(String::compareToIgnoreCase);
-	
-	System.out.println("largest"+largest.orElse(""));
+```java
+Optional<String>   largest = words.max(String::compareToIgnoreCase);
+System.out.println("largest"+largest.orElse(""));
+```
 
 
 
@@ -686,27 +685,161 @@ Collectors.toMap() 方法，可以产生映射表。
 
 
 
+## 2.11 下游收集器
+
+具体内容参考 P<25> 《java核心技术 卷II》
+
+
+
+## 2.12约简操作
+
+具体内容参考 P<28> 《java核心技术 卷II》
+
+
+
+## 2.13基本类型流
+
+上文中基本都是对象流或者将基本类型包装成包装类，但将每个基本数据类型包装到包装器对象中是很低效的。
+
+double、float、long、int、short、char、byte、boolean
+
+流库中具有专门的类型IntStream、LongStream和DoubleStream,用来存储基本类型值，而无需使用包装器。
+
+int、short、char、byte、boolean       **IntStream**
+
+long															**LongStream**
+
+double														**DoubleStream**
+
+
+
+**创建基本类型流**
+
+- 创建IntStream
+    - IntStream.of()
+    - Arrays.stream()
+    - IntStream  stream = IntStream.of(1,1,2,3,5);
+- 使用静态的generate和iterate方法
+- 此外IntStream和LongStream有静态方法range和rangeClosed,
+    - IntStream  zTnn = IntStream.range(0,100);
+    - IntStream zTH = IntStream.rangeClosed(0,100);
+- CharSequence 接口拥有codePoints和chars方法，可以生成由字符的Unicode码或由UTF-16编码机制的码元构成的IntStream。
+    - String  sentence  =  "\\uD835\\uDD46 is the set of octonions.";
+    - Intstream  codes = sentence.codePoints();
+- 如果你有一个对象流时，可以用mapToInt、mapToLong和mapToDouble将其转换为基本类型流。
+    - Stream\<String> words = ...;
+    - Intstream lengths = words.mapToInt(String::length);
+    - 为了将基本类型流转换成对象流，需要使用boxed方法
+    - Stream\<Integer> integers  = IntStream.range(0,100).boxed();
+
+
+
+**基本类型流与对象流的差异**
+
+通常，基本类型流上的方法与对象流上的方法类似。
+
+- toArray方法会返回基本类型数组
+- 产生可选结果的方法会返回一个OptionalInt、OptionalLong或OptionalDouble.
+    - 这些类与Optional类类似，但是具有getInt、getAsLong和getAsDouble方法，而不是get方法。
+- 具有返回总和、平均值、最大值和最小值的sum、average、max和min方法。
+    - 对象流没有定义这些方法。
+- summaryStatistics方法会产生一个类型为IntSummaryStatistics、LongSummaryStatistics或DoubleSummaryStatistics的对象，他们可以同时报告流的总和、平均值、最大值和最小值。
+
+
+
+## 2.14并行流
+
+流使得并行处理块操作变得很容易。这个过程几乎是自动的，但是需要遵守一些规则。
+
+首先，必须有一个并行流。可以用Collection.parallelStream()方法从任何集合中获取一个并行流：
+
+
+
+- Stream\<String>  parallelWords = words.parallelStream();
+    - 从任何集合中获取一个并行流
+- Stream\<String>  parallelWords = Stream.of(wordArray).parallel();
+    - 将任意的顺序流转换为并行流
+
+
+
+**只要在终结方法执行时，流处于并行模式，那么所有的中间流操作都将被并行化。**
+
+
+
+当流操作并行运行时，其目标是要让其返回结果与顺序执行时返回的结果相同。
+
+重要的是，这些操作可以以任意顺序执行。
+
+
+
+**例一：错误案例**
+
+```
+int[]  shortWords = new int[12];
+words.parallelStream().forEach(
+	s ->  {
+		if(s.length() < 12){
+			shortWords[s.length()]++;
+		}
+	}
+)
+```
+
+上述代码在并行流中运行是会出错的。
+
+传递给forEach的函数会在多个并发线程中运行，每个都会更新共享的数组。
+
+如果多次运行这个程序，你很可能就会发现每次运行都会产生不同的计数值，而且每个都是错的。
 
 
 
 
 
+**例二：修正版**
+
+```java
+Map<Integer,Long> shortWordCounts = words.parallelStream()
+		.filter(s -> s.length() < 10)
+		.collect(groupingBy(String::length,counting()));
+```
+
+注意：传递给并行流操作的函数不应该被堵塞。并行流使用fork-join池来操作流的各个部分。
+
+​			如果多个流操作被阻塞，那么池可能就无法做任何事情了。
 
 
 
+**排序并不排斥高效的并行处理**。
+
+​	例如：当计算stream.map(fun)时，流可以被划分为n的部分，它们会被并行地处理。
+
+​				然后，结果将会按照顺序重新组装起来。
 
 
 
+当放弃排序需求时，有些操作可以被更有效地并行化。
+
+通过在流上调用unordered方法，就可以明确表示我们对排序不感兴趣。
 
 
 
+为了让并行流正常工作，需要满足大量的条件：
+
+- 数据应该在内存中。
+    - 必须等到数据到达是非常低效的。
+- 流应该可以被高效地分成若干个子部分。
+    - 由数组或平衡二叉树支撑的流都可以工作得很多，但是 Stream.iterate返回的结果不行。
+- 流操作的工作量应该具有较大的规模。
+    - 如果总工作负载并不是很大，那么搭建并行计算时所付出的代价就没有什么意义
+- 流操作不应该被阻塞。
 
 
 
+**换句话说不要将所有的流都转换成并行流。**
 
+**只有在对已经位于内存中的数据执行大量计算操作时，才应该使用并行流。**
 
-
-
+ 
 
 ## 2.? API
 
@@ -953,7 +1086,140 @@ Collectors.toMap() 方法，可以产生映射表。
 
 
 
-# 3.类加载器
+
+
+### 2.?.8基本类型流
+
+
+
+**java.util.stream.IntStream 8**
+
+- static  IntStream range(int statInclusive, int endExclusive)
+- static  IntStream rangeClosed(int statInclusive, int endExclusive)
+    - 产生一个由给定范围内的整数构成的IntStream。
+- static  IntStream of(int... values)
+    - 产生一个由给定元素构成的IntStream。
+- int[]  toArray()
+    - 产生一个由当前流中的元素构成的数组
+- int sum()
+- OptionalDouble  average()
+- OptionalInt  max()
+- OptionalInt  min()
+- IntSummaryStatstics  summaryStatistics()
+    - 产生当前流中元素的总和、平均值、最大值、最小值，或者从中可以获得这些结果所有四种值的对象。
+- Stream\<Integer>  boxed()
+
+
+
+**java.util.stream.LongStream 8**
+
+- static  LongStream range(long  statInclusive, long  endExclusive)
+- static  LongStream rangeClosed(long  statInclusive,long endExclusive)
+    - 产生一个由给定范围内的整数构成的LongStream。
+- static    LongStream of(long... values)
+    - 用给定元素产生一个LongStream
+- long[] toArray()
+    - 用当前流中的元素产生一个数组。
+- long  sum()
+- OptionalDouble  average()
+- OptionalLong       max()
+- OptionalLong       min()
+- LongSummaryStatistics  summaryStatistics()
+    - 产生当前流中元素的总和、平均值、最大值、最小值，或者从中可以获得这些结果的所有四种值的对象。
+- Stream\<Long>  boxed()
+    - 产生用于当前流中的元素的包装器对象流。
+
+
+
+**java.util.stream.DoubleStream 8**
+
+- static  DoubleStream  of(double ...  values)
+    - 用给定元素产生一个DoubleStream
+- double[]  toArray()
+    - 用当前流中的元素产生一个数组
+- double   sum()
+- OptionalDouble  average()
+- OptionalDouble  max()
+- OptionalDouble  min()
+- DoubleSummaryStatistics  summaryStatistics()
+    - 产生当前流中元素的总和、平均值、最大值、和最小值，或者从中可以获得这些结果的所有四种值的对象。
+- Stream\<Double>  boxed()
+
+
+
+**java.lang.CharSequence 1.0**
+
+- IntStream  codePoints()
+    - 产生由当前字符串的所有Unicode码点构成的流。
+
+
+
+**java.util.Random 1.0**
+
+- IntStream  ints()
+- IntStream  ints(int randomNumberOrigin ,int randomNumberBound)
+- IntStream  ints(long  streamSize)
+- IntStream  ints(long streamSize,int randomNumberOrigin,int randomNumberBound)
+- LongStream longs()
+- LongStream longs(long  randomNumberOrigin,long ranomNumberBound)
+- LongStream longs(long streamSize)
+- LongStream longs(long streamSize,long randomNumberOrigin,long  randomNumberBound)
+- DoubleStream doubles()
+- DoubleStream doubles(double randomNumberOrigin,double randomNumberBound)
+- DoubleStream doubles(long  streamSize)
+- DoubleStream doubles(long streamSize,double randomNumberOrigin,double  randomNumberBound)
+    - 产生随机数流。如果提供了streamSize，这个流就是具有给定数量元素的有限流。当提供了边界时，其元素将位于randomNumberOrigin(包含)和 randomNumberBound(不包含)的区间内。
+
+
+
+**java.util.Optional ( Integer | Long | Double)**
+
+- static  Optional( Integer | Long | Double)  of  ( (int | long | double) value)
+    - 用所提供的基本类型值产生一个可选对象
+-  (int | long | double)  getAs ( Integer | Long | Double)()
+    - 产生当前可选对象的值，或者在其为空时抛出一个NoSuchElementException异常
+-  (int | long | double)  orElse( (int | long | double)  other)
+-  (int | long | double)  orElseGet( (int | long | double) Supplier other)
+    - 产生当前可选对象的值，或者在这个对象为空时产生可替代的值
+- void  ifPresent (  (int | long | double)  Consumer consumer)
+    - 如果当前可选对象不为空，则将其值传递给Consumer
+
+
+
+**java.util. (Int | long | double) SummaryStatistics**
+
+-   long  getCount()
+-   (int | long | double)   getSum()
+-  double  getAverage()
+-  (int | long | double)  getMax()
+-  (int | long | double)  getMin()
+    - 产生收集到的元素的个数、总和、平均值、最大值和最小值
+
+
+
+
+
+### 2.?.9并发流
+
+**java.util.stream.BaseStream\<T,S extends BaseStream\<T,S>**
+
+- S  parallel()
+    - 产生一个与当前流中元素相同的并行流
+- S  unordered()
+    - 产生一个与当前流中元素相同的无序流。
+
+
+
+**java.util.Collection\<E> 1.2**
+
+- Stream\<E>  parallelStream() 8
+    - 用于当前集合中的元素产一个并行流
+
+
+
+
+
+#  3.类加载器
 
 
 
