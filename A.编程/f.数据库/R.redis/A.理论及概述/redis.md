@@ -6,7 +6,7 @@
 
 ### 1.1.1 概述
 
-SDS( simple dynamic string,SDS )
+SDS( simple dynamic string,SDS )，就是字符串可以动态追加
 
 
 
@@ -49,6 +49,8 @@ struct sdshdr {
 
 
 ## 1.2  链表
+
+
 
 ### 1.2.1 概述
 
@@ -112,6 +114,8 @@ typedef struct list{
 ```
 
 虽然仅仅使用多个listNode结构就可以组成链表，但使用list来持有链表，操作会更方便。
+
+
 
 ### 1.2.4 特性
 
@@ -1030,8 +1034,6 @@ P208
 
 
 默认情况下，Redis使用0号数据库，但可以通过执行SELECT命令来切换目标数据库。
-
-
 
 
 
@@ -2166,6 +2168,8 @@ TODO 未完待续
 
 
 TODO 未完待续
+
+
 
 
 
