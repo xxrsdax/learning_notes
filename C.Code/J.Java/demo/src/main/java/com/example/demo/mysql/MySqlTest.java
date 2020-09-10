@@ -53,7 +53,7 @@ public class MySqlTest {
         PreparedStatement pstmt = null;
         try {
             //"&rewriteBatchedStatements=true",一次插入多条数据，只插入一次
-            conn = DriverManager.getConnection("jdbc:mysql://119.23.12.250:3306/demo?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8" + "&rewriteBatchedStatements=true", "root", "123456");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8" + "&rewriteBatchedStatements=true", "root", "www.cn.123");
 
             //4.定义sql语句
             String sql = "insert into person (name,pwd,age)values(?,?,?)";

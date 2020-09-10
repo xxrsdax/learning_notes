@@ -88,3 +88,90 @@ docker  images
 
 
 ![img](img/clipboard-1599028909098.png)
+
+
+
+
+
+## 2.3容器操作
+
+### **2.3.1 搜索镜像**
+
+[root@localhost ~]# docker search tomcat
+
+
+
+### 2.3.2拉取镜像
+
+[root@localhost ~]# docker pull tomcat
+
+
+
+### 2.3.3根据镜像启动容器
+
+docker run --name mytomcat -d tomcat:latest
+
+
+
+### 2.3.4查看运行中的容器
+
+docker ps 
+
+
+
+### 2.3.5停止运行中的容器
+
+docker stop  容器的id
+
+
+
+### 2.3.6查看所有的容器
+
+docker ps -a
+
+
+
+### 2.3.7启动容器
+
+docker start 容器id
+
+
+
+### 2.3.8删除一个容器
+
+ docker rm 容器id
+
+
+
+### 2.3.9查看容器的日志
+
+docker logs container-name/container-id
+
+
+
+### 2.3.10关闭linux的防火墙
+
+service firewalld status ；查看防火墙状态
+
+service firewalld stop：关闭防火墙
+
+
+
+### 2.3.11 例子
+
+#### **2.3.11.1启动一个做了端口映射的tomcat**
+
+[root@localhost ~]# docker run -d -p 8888:8080 tomcat
+
+-d：后台运行
+
+-p: 将主机的端口映射到容器的一个端口   主机端口:容器内部的端口
+
+
+
+更多命令参看
+
+https://docs.docker.com/engine/reference/commandline/docker/
+
+可以参考每一个镜像的文档
+
