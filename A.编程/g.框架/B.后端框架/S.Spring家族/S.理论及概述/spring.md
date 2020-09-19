@@ -585,6 +585,68 @@ P25
 
 
 
+# 4.Spring 操作 MongoDB
+
+## 4.1 Spring对MongoDB的支持
+
+![image-20200917080310259](img/image-20200917080310259.png)
+
+​	
+
+## 4.2 Spring Data  MongoDB 的基本用法
+
+![image-20200917080505523](img/image-20200917080505523.png)
+
+
+
+## 4.3 初始化 MongoDB的库及权限
+
+![image-20200917080612909](img/image-20200917080612909.png)
+
+## 4.4 Spring Data MongoDB的MongoTemplate
+
+通过 MongoDB template 操作数据库
+
+
+
+## 4.5 Spring Data MongoDB的Repository
+
+![image-20200917081934857](img/image-20200917081934857.png)
+
+通过 MongoDB 的Repository 实现去 操作数据库
+
+
+
+
+
+# 5.Spring 操作 Redis 
+
+## 5.1 Spring对Redis的支持
+
+![image-20200918081625173](img/image-20200918081625173.png)
+
+
+
+## 5.2 Jedis客户端的简单使用
+
+![image-20200918081801045](img/image-20200918081801045.png)
+
+？？？
+
+## 5.3 Jedis客户端的简单使用
+
+![image-20200918081959558](img/image-20200918081959558.png)
+
+
+
+## 5.4 通过Docker启动Redis
+
+![image-20200918082049031](img/image-20200918082049031.png)
+
+P26
+
+
+
 # ?.线上咖啡馆
 
 
