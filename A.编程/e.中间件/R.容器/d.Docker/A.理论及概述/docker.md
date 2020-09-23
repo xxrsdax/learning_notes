@@ -85,7 +85,7 @@ docker  images
 
 ### 2.2.4删除本地镜像
 
-
+docker  rmi  镜像id
 
 ![img](img/clipboard-1599028909098.png)
 
