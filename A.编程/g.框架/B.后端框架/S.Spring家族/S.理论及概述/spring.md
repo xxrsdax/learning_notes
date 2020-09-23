@@ -631,7 +631,7 @@ P25
 
 ![image-20200918081801045](img/image-20200918081801045.png)
 
-？？？
+
 
 ## 5.3 Jedis客户端的简单使用
 
@@ -642,6 +642,7 @@ P25
 ## 5.4 通过Docker启动Redis
 
 ![image-20200918082049031](img/image-20200918082049031.png)
+
 
 
 
@@ -656,6 +657,8 @@ docker exec -it 容器名  bash
 redis-cli
 
 
+
+![image-20200922131131873](img/image-20200922131131873.png)
 
 
 
@@ -756,6 +759,11 @@ JedisSentinelPool
 例如 JpaRepository RedisRepository
 
 ![image-20200922223409944](img/image-20200922223409944.png)
+
+
+
+
+
 
 
 
