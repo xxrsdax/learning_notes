@@ -766,9 +766,89 @@ JedisSentinelPool
 
 
 
+# 6.Project Reacotr 
+
+（项目反应堆）
 
 
 
+## 6.1 概述
+
+![image-20200923212358892](img/image-20200923212358892.png)
+
+
+
+## 6.2 核心概念
+
+![image-20200923211612905](img/image-20200923211612905.png)
+
+
+
+![image-20200923212758612](img/image-20200923212758612.png)
+
+
+
+## 6.3 通过Reactive访问Redis
+
+![image-20200923214133713](img/image-20200923214133713.png)
+
+​	
+
+## 6.4 通过Reactive访问MongoDB	
+
+![image-20200923215029164](img/image-20200923215029164.png)s
+
+
+
+
+
+## 6.5 通过Reactive访问RDBMS
+
+RDBMS 关系型数据库
+
+![image-20200924073449734](img/image-20200924073449734.png)
+
+
+
+![image-20200924073634600](img/image-20200924073634600.png)
+
+
+
+## 6.6 R2DBC Repository支持
+
+![image-20200924074604489](img/image-20200924074604489.png)
+
+
+
+
+
+暂时不符合生产使用条件
+
+注意关注 Project Reactor
+
+
+
+# 7.AOP
+
+## 7.1 Spring AOP 的一些核心概念
+
+![image-20200924075553749](img/image-20200924075553749.png)
+
+
+
+有接口的情况下 可以使用 JDK动态代理
+
+没有接口的情况下 可以使用 CGLIB代理  Spring 3的时候 只能增强一次
+
+
+
+## 7.2 常用注解
+
+![image-20200924080759811](img/image-20200924080759811.png)
+
+
+
+多看官方文档
 
 
 

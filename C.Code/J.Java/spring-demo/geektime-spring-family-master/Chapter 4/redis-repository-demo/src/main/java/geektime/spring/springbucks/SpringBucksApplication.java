@@ -6,6 +6,8 @@ import geektime.spring.springbucks.model.Coffee;
 import geektime.spring.springbucks.service.CoffeeService;
 import io.lettuce.core.ReadFrom;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -29,6 +31,8 @@ import java.util.Optional;
 public class SpringBucksApplication implements ApplicationRunner {
 	@Autowired
 	private CoffeeService coffeeService;
+
+	private Logger log = LoggerFactory.getLogger(SpringBucksApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBucksApplication.class, args);
