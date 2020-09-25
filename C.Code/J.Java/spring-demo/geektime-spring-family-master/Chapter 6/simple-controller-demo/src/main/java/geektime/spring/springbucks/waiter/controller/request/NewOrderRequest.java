@@ -6,10 +6,15 @@ import lombok.ToString;
 
 import java.util.List;
 
+/**
+ * @author xxrsdax
+ */
 @Getter
 @Setter
 @ToString
 public class NewOrderRequest {
+
     private String customer;
     private List<String> items;
+
 }

@@ -7,6 +7,8 @@ import geektime.spring.springbucks.repository.CoffeeRepository;
 import geektime.spring.springbucks.service.CoffeeOrderService;
 import geektime.spring.springbucks.service.CoffeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -18,16 +20,25 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Optional;
 
+/**
+ * @author xxrsdax
+ */
 @Slf4j
 @EnableTransactionManagement
 @SpringBootApplication
 @EnableJpaRepositories
+//开启AspectJ 代理支持
 @EnableAspectJAutoProxy
 public class SpringBucksApplication implements ApplicationRunner {
+
+	private Logger log = LoggerFactory.getLogger(SpringBucksApplication.class);
+
 	@Autowired
 	private CoffeeRepository coffeeRepository;
+
 	@Autowired
 	private CoffeeService coffeeService;
+
 	@Autowired
 	private CoffeeOrderService orderService;
 

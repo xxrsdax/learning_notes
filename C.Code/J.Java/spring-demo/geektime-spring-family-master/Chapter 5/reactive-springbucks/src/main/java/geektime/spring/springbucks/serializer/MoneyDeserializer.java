@@ -16,6 +16,9 @@ public class MoneyDeserializer extends StdDeserializer<Money> {
 
     @Override
     public Money deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+
         return Money.ofMinor(CurrencyUnit.of("CNY"), p.getLongValue());
+
     }
+
 }

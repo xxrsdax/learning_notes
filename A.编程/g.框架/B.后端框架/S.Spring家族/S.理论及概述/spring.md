@@ -828,17 +828,17 @@ RDBMS 关系型数据库
 
 
 
-# 7.AOP
+# 7.AOP打印数据访问摘要
 
 ## 7.1 Spring AOP 的一些核心概念
 
 ![image-20200924075553749](img/image-20200924075553749.png)
 
-
+Spring中拥有CGLIB完整的代码
 
 有接口的情况下 可以使用 JDK动态代理
 
-没有接口的情况下 可以使用 CGLIB代理  Spring 3的时候 只能增强一次
+没有接口的情况下 可以使用 CGLIB代理  Spring 3的时候 只能增强一次，Spring 4之后就可以多次增强
 
 
 
@@ -849,6 +849,40 @@ RDBMS 关系型数据库
 
 
 多看官方文档
+
+
+
+## 7.3 打印SQL
+
+![image-20200924224219482](img/image-20200924224219482.png)
+
+可以去github 上了解 P64py 
+
+使用AOP记录Dao  Service Controller  记录耗时日志
+
+不要输出 敏感信息
+
+
+
+![image-20200925075205307](img/image-20200925075205307.png)
+
+
+
+​	
+
+
+
+# 8.Spring Mvc
+
+## 8.1 Spring Mvc 组件
+
+![image-20200925080841839](img/image-20200925080841839.png)
+
+
+
+## 8.2 Spring Mvc 常用注解
+
+![image-20200925080948949](img/image-20200925080948949.png)
 
 
 
