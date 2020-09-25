@@ -2,6 +2,7 @@ package com.ax.jdbc;
 
 import com.zaxxer.hikari.util.DriverDataSource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +25,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class SpringJdbcApplication implements CommandLineRunner {
 
+
     @Autowired
     private DataSource dataSource;
 
@@ -40,11 +42,11 @@ public class SpringJdbcApplication implements CommandLineRunner {
     private void showConnection() throws Exception {
 
 
-        log.info("dataSource" + dataSource.toString());
+//        log.info("dataSource" + dataSource.toString());
 
         Connection connection = dataSource.getConnection();
 
-        log.info(connection.toString());
+//        log.info(connection.toString());
 
         connection.close();
 

@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.reactor</groupId>
 	<artifactId>simple-reactor-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>simple-reactor-demo</name>
+	<name>geek-chapter-5-simple-reactor-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -37,7 +37,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+s
 	<build>
 		<plugins>
 			<plugin>
