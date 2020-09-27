@@ -25,6 +25,8 @@ import java.util.Map;
 @SpringBootApplication
 @EnableJpaRepositories
 public class SpringBucksApplication implements ApplicationRunner {
+
+
 	@Autowired
 	private CoffeeService coffeeService;
 	@Autowired
