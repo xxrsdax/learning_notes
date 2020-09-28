@@ -920,9 +920,71 @@ Spring中拥有CGLIB完整的代码
 
 
 
+## 8.4 Spring MVC的请求处理流程
+
+![image-20200928071517293](img/image-20200928071517293.png)
 
 
-P41
+
+## 8.5 一次请求的大致处理流程
+
+![image-20200928071627341](img/image-20200928071627341.png)
+
+
+
+## 8.6 查看Spring MVC源码
+
+dispatchServlet
+
+
+
+## 8.7 定义映射(请求路径)
+
+![image-20200928074003166](img/image-20200928074003166.png)
+
+
+
+
+
+## 8.8 定义处理方法(请求及响应参数)
+
+![image-20200928074042994](img/image-20200928074042994.png)
+
+## 8.9 例子
+
+![image-20200928074703239](img/image-20200928074703239.png)
+
+consumers
+
+pdoduces
+
+ResponseStatus
+
+![image-20200928074743001](img/image-20200928074743001.png)
+
+
+
+## 8.10 定义类型转换
+
+![image-20200928075451325](img/image-20200928075451325.png)
+
+## 8.11 定义校验
+
+![image-20200928075644545](img/image-20200928075644545.png)
+
+
+
+## 8.12 Multipart 上传
+
+![image-20200928075726785](img/image-20200928075726785.png)
+
+MultipartAutoConfiguration
+
+
+
+
+
+P43
 
 
 
