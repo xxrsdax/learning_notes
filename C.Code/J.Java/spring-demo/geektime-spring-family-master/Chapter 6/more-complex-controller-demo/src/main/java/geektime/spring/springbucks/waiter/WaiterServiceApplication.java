@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableCaching
 public class WaiterServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WaiterServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WaiterServiceApplication.class, args);
+    }
 
 }

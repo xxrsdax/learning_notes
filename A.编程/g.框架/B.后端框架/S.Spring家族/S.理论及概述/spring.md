@@ -1,4 +1,4 @@
-# 1.Spring Framework的历史
+# ss1.Spring Framework的历史
 
 - 诞生与2002年，成型于2003年，最早的作者为Rod Johnson
     - 《Expert One-on-One J2EE Design and Development》
@@ -982,9 +982,85 @@ MultipartAutoConfiguration
 
 
 
+## 8.13 Postman
+
+了解一波Postman使用
 
 
-P43
+
+## 8.14 ModelAndView视图解析逻辑
+
+### 8.14.1 试图解析的实现基础 ViewResolver
+
+![image-20200929073020358](img/image-20200929073020358.png)
+
+
+
+### 8.14.2 DispatcherServlet 中的试图解析逻辑
+
+![image-20200929073141924](img/image-20200929073141924.png)
+
+
+
+
+
+## 8.15 ResponseBody视图解析逻辑
+
+### 8.15.1 DispatcherServlet中的视图解析逻辑
+
+![image-20200929073632695](img/image-20200929073632695.png)
+
+
+
+
+
+
+
+## 8.16 重定向
+
+### 8.16.1 重定向 redirect
+
+
+
+![image-20200929074337245](img/image-20200929074337245.png)
+
+
+
+### 8.16.2 转发 forward
+
+
+
+
+
+
+
+## 8.17 SpringMVC支持的视图
+
+### 8.17.1 支持的视图列表
+
+![image-20200929074606483](img/image-20200929074606483.png)
+
+
+
+官方文档 1.9
+
+
+
+### 8.17.2 配置MessageConverter
+
+![image-20200929074812539](img/image-20200929074812539.png)
+
+
+
+### 8.17.3 Spring Boot对Jackson的支持
+
+![image-20200929074940729](img/image-20200929074940729.png)
+
+可以定制Json解析器
+
+
+
+P47
 
 
 
