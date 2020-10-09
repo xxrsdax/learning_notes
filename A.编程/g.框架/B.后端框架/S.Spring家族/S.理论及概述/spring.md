@@ -1,4 +1,4 @@
-# 1.Spring Framework的历史
+# ss1.Spring Framework的历史
 
 - 诞生与2002年，成型于2003年，最早的作者为Rod Johnson
     - 《Expert One-on-One J2EE Design and Development》
@@ -982,9 +982,194 @@ MultipartAutoConfiguration
 
 
 
+## 8.13 Postman
+
+了解一波Postman使用
 
 
-P43
+
+## 8.14 ModelAndView视图解析逻辑
+
+### 8.14.1 试图解析的实现基础 ViewResolver
+
+![image-20200929073020358](img/image-20200929073020358.png)
+
+
+
+### 8.14.2 DispatcherServlet 中的试图解析逻辑
+
+![image-20200929073141924](img/image-20200929073141924.png)
+
+
+
+
+
+## 8.15 ResponseBody视图解析逻辑
+
+### 8.15.1 DispatcherServlet中的视图解析逻辑
+
+![image-20200929073632695](img/image-20200929073632695.png)
+
+
+
+
+
+
+
+## 8.16 重定向
+
+### 8.16.1 重定向 redirect
+
+
+
+![image-20200929074337245](img/image-20200929074337245.png)
+
+
+
+### 8.16.2 转发 forward
+
+
+
+
+
+
+
+## 8.17 SpringMVC支持的视图
+
+### 8.17.1 支持的视图列表
+
+![image-20200929074606483](img/image-20200929074606483.png)
+
+
+
+官方文档 1.9
+
+
+
+### 8.17.2 配置MessageConverter
+
+![image-20200929074812539](img/image-20200929074812539.png)
+
+
+
+### 8.17.3 Spring Boot对Jackson的支持
+
+![image-20200929074940729](img/image-20200929074940729.png)
+
+可以定制Json解析器
+
+
+
+## 8.18 模板引擎
+
+### 8.18.1 Tymeleaf
+
+![image-20201009065631299](img/image-20201009065631299.png)
+
+
+
+### 8.18.2 Tymeleaf的默认配置
+
+![image-20201009065707369](img/image-20201009065707369.png)
+
+
+
+
+
+
+
+## 9.19.静态资源
+
+
+
+### 9.19.1 Spring Boot中的静态资源配置
+
+![image-20201009070830409](img/image-20201009070830409.png)
+
+
+
+### 9.19.2 Spring Boot中的缓存配置
+
+![image-20201009070917173](img/image-20201009070917173.png)
+
+
+
+### 9.19.3 Controller中手工设置缓存
+
+不建议使用
+
+![image-20201009072213514](img/image-20201009072213514.png)
+
+
+
+
+
+### 9.19.4 建议的资源访问方式
+
+![image-20201009072609961](img/image-20201009072609961.png)
+
+
+
+## 9.20. Spring MVC的全局异常处理
+
+### 9.20.1 Spring MVC的异常解析
+
+![image-20201009072914267](img/image-20201009072914267.png)
+
+
+
+DispatchServlet >> doService >> dispacthException >> processDispatchResult
+
+
+
+### 9.20.2 异常处理方法
+
+![image-20201009073158813](img/image-20201009073158813.png)
+
+
+
+@ControllerAdvice中添加的方法优先级 低于 @Controller中添加方法的优先级
+
+
+
+## 9.21 Spring MVC的拦截器
+
+### 9.21.1 Spring MVC的拦截器
+
+![image-20201009074445066](img/image-20201009074445066.png)
+
+
+
+![image-20201009074754188](img/image-20201009074754188.png)
+
+
+
+### 9.21.2 拦截器的配置方式
+
+![image-20201009074904924](img/image-20201009074904924.png)
+
+实现HandlerInterceptor 接口
+
+实现WebMvcConfigurer接口配置类
+
+```java
+@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new PerformanceInteceptor())
+				.addPathPatterns("/coffee/**").addPathPatterns("/order/**");
+	}
+
+```
+
+
+
+StopWatch 注意一下这个类
+
+
+
+P51
+
+
 
 
 
