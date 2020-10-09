@@ -1060,7 +1060,116 @@ MultipartAutoConfiguration
 
 
 
-P47
+## 8.18 模板引擎
+
+### 8.18.1 Tymeleaf
+
+![image-20201009065631299](img/image-20201009065631299.png)
+
+
+
+### 8.18.2 Tymeleaf的默认配置
+
+![image-20201009065707369](img/image-20201009065707369.png)
+
+
+
+
+
+
+
+## 9.19.静态资源
+
+
+
+### 9.19.1 Spring Boot中的静态资源配置
+
+![image-20201009070830409](img/image-20201009070830409.png)
+
+
+
+### 9.19.2 Spring Boot中的缓存配置
+
+![image-20201009070917173](img/image-20201009070917173.png)
+
+
+
+### 9.19.3 Controller中手工设置缓存
+
+不建议使用
+
+![image-20201009072213514](img/image-20201009072213514.png)
+
+
+
+
+
+### 9.19.4 建议的资源访问方式
+
+![image-20201009072609961](img/image-20201009072609961.png)
+
+
+
+## 9.20. Spring MVC的全局异常处理
+
+### 9.20.1 Spring MVC的异常解析
+
+![image-20201009072914267](img/image-20201009072914267.png)
+
+
+
+DispatchServlet >> doService >> dispacthException >> processDispatchResult
+
+
+
+### 9.20.2 异常处理方法
+
+![image-20201009073158813](img/image-20201009073158813.png)
+
+
+
+@ControllerAdvice中添加的方法优先级 低于 @Controller中添加方法的优先级
+
+
+
+## 9.21 Spring MVC的拦截器
+
+### 9.21.1 Spring MVC的拦截器
+
+![image-20201009074445066](img/image-20201009074445066.png)
+
+
+
+![image-20201009074754188](img/image-20201009074754188.png)
+
+
+
+### 9.21.2 拦截器的配置方式
+
+![image-20201009074904924](img/image-20201009074904924.png)
+
+实现HandlerInterceptor 接口
+
+实现WebMvcConfigurer接口配置类
+
+```java
+@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new PerformanceInteceptor())
+				.addPathPatterns("/coffee/**").addPathPatterns("/order/**");
+	}
+
+```
+
+
+
+StopWatch 注意一下这个类
+
+
+
+P51
+
+
 
 
 
