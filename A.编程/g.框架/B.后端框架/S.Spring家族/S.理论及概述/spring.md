@@ -1,4 +1,4 @@
-# ss1.Spring Framework的历史
+# 1.Spring Framework的历史
 
 - 诞生与2002年，成型于2003年，最早的作者为Rod Johnson
     - 《Expert One-on-One J2EE Design and Development》
@@ -814,7 +814,7 @@ JedisSentinelPool
 
 
 
-## 6.5 通过Reactive访问RDBMS
+## 6.5 通过Reactive访问RDBMS (Spring Data R2DBC)
 
 RDBMS 关系型数据库
 
@@ -1301,7 +1301,177 @@ Reactive  响应式
 
 
 
-P59
+## 12.5构建更好的URI
+
+![image-20201011200153840](img/image-20201011200153840.png)
+
+
+
+## 12.6 认识HTTP方法
+
+![image-20201011200315130](img/image-20201011200315130.png)
+
+
+
+## 12.7 URI与HTTP方法的组合
+
+![image-20201011200429360](img/image-20201011200429360.png)
+
+
+
+## 12.8 HTTP状态码
+
+![image-20201011200507398](img/image-20201011200507398.png)
+
+具体内容可以百度
+
+
+
+
+
+## 12.9 合适的表述
+
+![image-20201011200627850](img/image-20201011200627850.png)
+
+
+
+
+
+# 13.HATEOAS
+
+## 13.1 什么是HATEOAS
+
+![image-20201011200849555](img/image-20201011200849555.png)
+
+
+
+## 13.2 HATEOAS v.s. WSDL
+
+![image-20201011201850714](img/image-20201011201850714.png)
+
+
+
+## 13.3 HATEOAS 示例
+
+![image-20201011202019037](img/image-20201011202019037.png)
+
+
+
+## 13.4 常用的超链接类型
+
+![image-20201011202207466](img/image-20201011202207466.png)
+
+
+
+
+
+# 14.HAL
+
+## 14.1 认识HAL
+
+![image-20201011202940146](img/image-20201011202940146.png)
+
+
+
+# 15. Spring Data REST
+
+![image-20201011203102721](img/image-20201011203102721.png)
+
+
+
+
+
+
+
+# 16.分布式环境中解决session问题
+
+## 16.1 常见的会话解决方案
+
+![image-20201011213400547](img/image-20201011213400547.png)
+
+粘性回话:尽量将同一个用户的请求落到同一台服务器上,但会出现请求落在不同服务器 session失效
+
+会话复制: session复制会存在成本
+
+集中会话: 将session集中实现,通过key去获取制定session
+
+
+
+## 16.2 Spring Sessions
+
+![image-20201011213740657](img/image-20201011213740657.png)
+
+
+
+
+
+## 16.3 Spring Session 原理
+
+![image-20201011214129331](img/image-20201011214129331.png)
+
+
+
+
+
+## 16.4  使用基于Redis的Spring session(HttpSession)
+
+![image-20201011214610325](img/image-20201011214610325.png)
+
+
+
+## 16.5 Spring Boot 对 Spring Session的支持
+
+![image-20201011214759567](img/image-20201011214759567.png)
+
+
+
+## 具体的使用可以参考官网
+
+
+
+# 17.WebFlux
+
+## 17.1 什么是WebFlux
+
+![image-20201012073121525](img/image-20201012073121525.png)
+
+![image-20201012073223438](img/image-20201012073223438.png)	简单的说:只需少量固定数量的线程和较少的内存即可实现高容量的并发
+
+
+
+## 17.2 WebMVC 与 WebFlux 的抉择
+
+![image-20201012073453703](img/image-20201012073453703.png)
+
+
+
+## 17.3 WebFlux中的编程模型
+
+![image-20201012073555218](img/image-20201012073555218.png)
+
+
+
+
+
+## 17.4 编程模型-基于注解的控制器
+
+![image-20201012073636155](img/image-20201012073636155.png)
+
+注意:基于注解的形式  和 Spring Mvc差不多,但返回值必须是 Mono\<T>或者 Flux\<T>
+
+​			Mono代表0个或1个返回值
+
+​			Flux表示多个返回值
+
+
+
+## 17.5 编程模型-函数式 Endpoints
+
+自行查阅
+
+
+
+P65
 
 
 
