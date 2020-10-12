@@ -1,4 +1,4 @@
-# ss1.Spring Framework的历史
+# 1.Spring Framework的历史
 
 - 诞生与2002年，成型于2003年，最早的作者为Rod Johnson
     - 《Expert One-on-One J2EE Design and Development》
@@ -1078,23 +1078,23 @@ MultipartAutoConfiguration
 
 
 
-## 9.19.静态资源
+## 8.19.静态资源
 
 
 
-### 9.19.1 Spring Boot中的静态资源配置
+### 8.19.1 Spring Boot中的静态资源配置
 
 ![image-20201009070830409](img/image-20201009070830409.png)
 
 
 
-### 9.19.2 Spring Boot中的缓存配置
+### 8.19.2 Spring Boot中的缓存配置
 
 ![image-20201009070917173](img/image-20201009070917173.png)
 
 
 
-### 9.19.3 Controller中手工设置缓存
+### 8.19.3 Controller中手工设置缓存
 
 不建议使用
 
@@ -1104,15 +1104,15 @@ MultipartAutoConfiguration
 
 
 
-### 9.19.4 建议的资源访问方式
+### 8.19.4 建议的资源访问方式
 
 ![image-20201009072609961](img/image-20201009072609961.png)
 
 
 
-## 9.20. Spring MVC的全局异常处理
+## 8.20. Spring MVC的全局异常处理
 
-### 9.20.1 Spring MVC的异常解析
+### 8.20.1 Spring MVC的异常解析
 
 ![image-20201009072914267](img/image-20201009072914267.png)
 
@@ -1122,7 +1122,7 @@ DispatchServlet >> doService >> dispacthException >> processDispatchResult
 
 
 
-### 9.20.2 异常处理方法
+### 8.20.2 异常处理方法
 
 ![image-20201009073158813](img/image-20201009073158813.png)
 
@@ -1132,9 +1132,9 @@ DispatchServlet >> doService >> dispacthException >> processDispatchResult
 
 
 
-## 9.21 Spring MVC的拦截器
+## 8.21 Spring MVC的拦截器
 
-### 9.21.1 Spring MVC的拦截器
+### 8.21.1 Spring MVC的拦截器
 
 ![image-20201009074445066](img/image-20201009074445066.png)
 
@@ -1168,6 +1168,74 @@ StopWatch 注意一下这个类
 
 
 P51
+
+​	
+
+
+
+# 9.答疑
+
+## 9.1 使用MySQL数据库代替H2
+
+### 9.1.1 修改配置文件
+
+![image-20201009164443715](img/image-20201009164443715.png)
+
+### 9.1.2 docker启动MySQL
+
+![image-20201009164613852](img/image-20201009164613852.png)
+
+
+
+
+
+
+
+## 9.2 示例中用到的一些Java语言特性说明
+
+### 9.2.1 Lambda
+
+![image-20201009165056636](img/image-20201009165056636.png)
+
+
+
+### 9.2.2 Stream
+
+![image-20201009165119034](img/image-20201009165119034.png)
+
+
+
+
+
+## 9.3 Mybatis Generator生成代码时的一些说明
+
+![image-20201009165825821](img/image-20201009165825821.png)
+
+
+
+
+
+## 9.4 MyBatis-Plus介绍
+
+
+
+看官网
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
