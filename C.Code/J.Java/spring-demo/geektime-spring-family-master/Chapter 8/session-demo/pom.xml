@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.web</groupId>
 	<artifactId>session-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>session-demo</name>
+	<name>geek-8-ssession-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
