@@ -1144,7 +1144,7 @@ DispatchServlet >> doService >> dispacthException >> processDispatchResult
 
 
 
-### 9.21.2 拦截器的配置方式
+### 8.21.2 拦截器的配置方式
 
 ![image-20201009074904924](img/image-20201009074904924.png)
 
@@ -1220,20 +1220,6 @@ P51
 
 
 看官网
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1507,6 +1493,8 @@ Reactive  响应式
 
 
 
+
+
 ## 17.2 WebMVC 与 WebFlux 的抉择
 
 ![image-20201012073453703](img/image-20201012073453703.png)
@@ -1540,6 +1528,10 @@ Reactive  响应式
 
 
 P65
+
+
+
+
 
 
 
