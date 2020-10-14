@@ -24,3 +24,12 @@
 
 ​        (从foobarbar的第五个位置开始查找)
 
+
+
+
+
+# 2.语法篇
+
+## 2.1 创建指定数据库并设置字符集
+
+CREATE DATABASE IF NOT EXISTS yourdbname DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
