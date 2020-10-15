@@ -1,3 +1,5 @@
+
+
 # 1.Spring Framework的历史
 
 - 诞生与2002年，成型于2003年，最早的作者为Rod Johnson
@@ -1594,6 +1596,46 @@ Reactive  响应式
 使用 --debug 参数 然后运行项目
 
 ![image-20201013075645193](img/image-20201013075645193.png)
+
+
+
+## 18.6 动手实现自己的自动配置
+
+### 18.6.1 条件注解
+
+![image-20201015074007833](img/image-20201015074007833.png)
+
+![image-20201015074129582](img/image-20201015074129582.png)
+
+![image-20201015074155231](img/image-20201015074155231.png)
+
+
+
+### 18.6.2 自动配置的执行顺序
+
+![image-20201015074228949](img/image-20201015074228949.png)
+
+
+
+### 18.6.3 代码
+
+代码在 chapter9
+
+![image-20201015075456531](img/image-20201015075456531.png)
+
+greeting 是被配置的模块
+
+geekting-spring-boot-autoconfigure 是自动配置的模块
+
+autoconfigure-demo 是使用自动配置的模块
+
+
+
+## 18.7 Spring 的错误分析机制
+
+FailureAnalysis
+
+建议参考网上内容
 
 
 
