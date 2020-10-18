@@ -1769,11 +1769,11 @@ P71
 
 
 
-### 18.9.5 Spring Boot 的配置加载机制
+## 18.10 Spring Boot 的配置加载机制
 
 
 
-#### 18.9.5.1 配置及属性加载顺序
+### 18.10.1 配置及属性加载顺序
 
 配置文件
 
@@ -1805,7 +1805,7 @@ P71
 
 
 
-#### 18.9.5.2 配置文件可以存放的地址
+### 18.10.2 配置文件可以存放的地址
 
 properties
 
@@ -1830,6 +1830,198 @@ yml
 ### 阅读官方文档中 关于外部配置的内容
 
 
+
+
+
+
+
+## 18.11 理解配置背后的PropertySource 抽象
+
+
+
+在spring Boot 中存在许多配置来源,
+
+这些配置来源 最终都会在Spring 中抽象成 PropertySource
+
+
+
+### 18.11.1 PropertySource
+
+![image-20201018223459093](img/image-20201018223459093.png)
+
+
+
+
+
+### 18.11.2 Spring Boot中的@ConfigurationProperties
+
+![image-20201018224032700](img/image-20201018224032700.png)
+
+
+
+结构化,表示可以绑定在指定类中的属性对象上
+
+
+
+案例:
+
+JdbcProperties
+
+​	![image-20201019064824111](img/image-20201019064824111.png)
+
+
+
+
+
+### 18.11.3  定制PropertySource
+
+![image-20201018224127967](img/image-20201018224127967.png)
+
+首先要显示自己的 PropertySource类 (可以参考 RandomValuePropertySource )
+
+
+
+## 实现从其他配置来源中读取配置文件
+
+参考
+
+chapter 9        sproperty-source-demo
+
+
+
+
+
+## 18.12 Spring Boot的各类Actuator Endpoint
+
+Actuator Endpoint
+
+执行器端点
+
+
+
+### 18.12.1 Actuator (执行器)
+
+![image-20201019071347067](img/image-20201019071347067.png)
+
+
+
+想要使用actuator的功能:在项目依赖中添加 spring-boot-starter-actuator
+
+
+
+
+
+### 18.12.2 一些常用Endpoint
+
+![image-20201019071813679](img/image-20201019071813679.png)
+
+![image-20201019071959811](img/image-20201019071959811.png)
+
+默认 HTTP 访问
+
+默认 JMX 访问
+
+
+
+### 18.12.3 如何访问 Actuator Endpoint
+
+![image-20201019072051569](img/image-20201019072051569.png)
+
+![image-20201019072221426](img/image-20201019072221426.png)
+
+
+
+可以关闭指定 Endpoint
+
+
+
+![image-20201019072325734](img/image-20201019072325734.png)
+
+
+
+
+
+### 18.12.4 动手定制自己的Health Indicator
+
+
+
+Health Indicator 用来检测系统的健康状况
+
+但有时需要检测一些自己提供的配置文件  配置属性是否加载成功,所以需要自己定制 Health Indicator
+
+
+
+#### 18.12.4.1  Spring Boot 自带的 Health Indicator
+
+![image-20201019072746725](img/image-20201019072746725.png)
+
+
+
+![image-20201019073023169](img/image-20201019073023169.png)
+
+
+
+![image-20201019073141444](img/image-20201019073141444.png)
+
+可以查看一下上述 Health Indicator 是如何实现的
+
+
+
+#### 18.12.4.2 自定义Health Indicator
+
+![image-20201019073409990](img/image-20201019073409990.png)
+
+
+
+代码参考 chapter-10         indicator-demo
+
+
+
+## 18.13 通过Micrometer获取运行数据
+
+Micrometer          (可以理解为度量)
+
+### 18.13.1 认识 Micrometer
+
+![image-20201019074226277](img/image-20201019074226277.png)
+
+
+
+![image-20201019074245130](img/image-20201019074245130.png)
+
+
+
+### 18.13.2 一些核心度量指标
+
+![image-20201019074348998](img/image-20201019074348998.png)
+
+
+
+### 18.13.3 Micrometer in Spring Boot 2.x
+
+![image-20201019074431886](img/image-20201019074431886.png)
+
+
+
+![image-20201019074639885](img/image-20201019074639885.png)
+
+
+
+### 18.13.4 自定义度量指标
+
+![image-20201019074725768](img/image-20201019074725768.png)
+
+
+
+参考 chapter 10   metrics-demo
+
+
+
+
+
+
+
+P 78
 
 
 

@@ -13,7 +13,7 @@
 			<groupId>geektime.spring.hello</groupId>
 			<artifactId>geektime-spring-boot-autoconfigure</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>''
+		</dependency>
 		<dependency>
 			<groupId>geektime.spring.hello</groupId>
 			<artifactId>greeting</artifactId>
