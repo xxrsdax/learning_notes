@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.springbucks</groupId>
 	<artifactId>waiter-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>waiter-service</name>
+	<name>geektime-10-ssl-waiter-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

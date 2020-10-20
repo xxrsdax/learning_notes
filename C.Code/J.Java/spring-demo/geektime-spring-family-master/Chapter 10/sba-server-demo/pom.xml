@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.boot</groupId>
 	<artifactId>sba-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sba-server</name>
+	<name>geektime-10-sba-server</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
