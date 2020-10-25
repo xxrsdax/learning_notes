@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.springbucks</groupId>
 	<artifactId>waiter-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>waiter-service</name>
+	<name>geektime-10-docker-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -82,6 +82,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- maven 将项目 打包成 -->
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>

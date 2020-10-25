@@ -2141,7 +2141,193 @@ P 78
 
 
 
+## 18.17 配置web容器支持HTTP/2
+
+
+
+### 18.17.1 配置 HTTP/2 支持
+
+![image-20201025202212941](img/image-20201025202212941.png)
+
+使用 tomcat容器时,需要JDK9 即以上
+
+如果使用Netty容器时,可以使用JDK8
+
+Spring Boot 不支持的明文的HTTP/2, 需要配置SSL(也就是安全的)
+
+
+
+需要使用时,在application.yml 中配置  server.http2.enabled 
+
+
+
+**具体内容网上搜一下**
+
+
+
+## 18.18 Spring Boot 编写命令行运行的程序
+
+
+
+### 18.18.1 关闭Web容器
+
+![image-20201025205013386](img/image-20201025205013386.png)
+
+
+
+#### 18.18.2 常用工具类
+
+![image-20201025205101896](img/image-20201025205101896.png)
+
+
+
+## 18.19 了解可执行Jar背后的秘密
+
+### 18.19.1 认识可执行Jar
+
+![image-20201025211813951](img/image-20201025211813951.png)
+
+
+
+其中包含 : 表示Jar中包含的内容
+
+其中不包含:表示Jar中没有的,这里表示没有JDK/JRE 所以Jar运行时,需要JDK环境
+
+
+
+
+
+### 18.19.2 如何找到程序的入口
+
+![image-20201025212029661](img/image-20201025212029661.png)
+
+这时的jar 需要java -jar 命令去执行
+
+
+
+### 18.19.3 再进一步:可直接运行的jar
+
+![image-20201025212448010](img/image-20201025212448010.png)
+
+这时 ./xxx.jar  即可运行
+
+
+
+### 18.19.4 默认脚本中的一些配置项
+
+![image-20201025212637385](img/image-20201025212637385.png)
+
+参考Spring Boot的官方文档
+
+例子:参考 chapter 10
+
+
+
+### 18.19.5 jar运行web项目
+
+
+
+#### Linux中jar包部署Web项目
+
+第一种方式：jar包启动，但断开linux连接后会关闭
+
+```bash
+java -jar xxx.jar
+```
+
+第二种方式：jar包启动，并运行在后台，断开linux连接后不会关闭
+
+```bash
+java -jar xxx.jar & 
+```
+
+第三种方式:jar包启动，并运行在后台以及指定输出日志，断开linux连接后不会关闭
+
+```bash
+nohup java -jar xxx.jar > msg.log  2>&1 &
+```
+
+
+
+
+
+## 18.20 SpringBoot 应用打包成Docker镜像文件
+
+
+
+### 18.20.1 什么是Docker镜像
+
+![image-20201025214407550](img/image-20201025214407550.png)
+
+镜像是分层的: docker里面使用了联合文件系统,让当前镜像可以构建在另一个镜像的基础之上.
+
+
+
+### 18.20.2 Dockerfile 相关指令
+
+![image-20201025214628094](img/image-20201025214628094.png)
+
+具体格式参考官方文档
+
+上述指令是写在dockerfile文件内的
+
+?怎么使用
+
+
+
+### 18.20.3 通过Maven构建Docker镜像
+
+![image-20201025215023730](img/image-20201025215023730.png)
+
+
+
+find  / -name docker.service   可以查到docker.service  文件所在地
+
+
+
+案例:
+
+![image-20201025215145769](img/image-20201025215145769.png)
+
+
+
+
+
+案例:
+
+​	chapter 10  docker-demo
+
+进入到项目目录  执行一下命令
+
+mvn clean package  -Dmaven.test.skip=true
+
+docker  images
+
+docker run --name waiter-service -d  -p 8080:8080 springbucks/waiter-service:0.0.1-SNAPSHOT
+
+![image-20201025220023367](img/image-20201025220023367.png)
+
+![image-20201025222439016](img/image-20201025222439016.png)
+
+
+
 p81
+
+
+
+# 本章小结
+
+![image-20201025223323229](img/image-20201025223323229.png)
+
+
+
+
+
+
+
+P86
+
+
 
 
 

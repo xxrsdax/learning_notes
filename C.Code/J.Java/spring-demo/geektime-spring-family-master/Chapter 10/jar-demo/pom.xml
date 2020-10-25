@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.springbucks</groupId>
 	<artifactId>waiter-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>waiter-service</name>
+	<name>geektime-10-jar-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -76,6 +76,7 @@
 	</dependencies>
 
 	<build>
+		<!--	将项目打包成可直接运行的jar时需要的插件	-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
