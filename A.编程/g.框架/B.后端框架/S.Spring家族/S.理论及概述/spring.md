@@ -2449,7 +2449,165 @@ https://12factor.net/zh_cn
 
 
 
-P90
+
+
+# 22.Spring Cloud
+
+## 22.1 Spring Cloud 组成部分
+
+![image-20201028072114399](img/image-20201028072114399.png)
+
+
+
+## 22.2 Spring Cloud的主要功能
+
+![image-20201028072317921](img/image-20201028072317921.png)
+
+
+
+## 22.3 Spring Cloud 的版本号规则
+
+![image-20201028072644897](img/image-20201028072644897.png)
+
+字母排序
+
+A~Zxxx-SR-1
+
+比较大的变更时  SR-1 => SR-2
+
+时间较长后    Z => Y
+
+注意:只是举个例子
+
+
+
+# 23. 注册中心
+
+## 23.1 使用Eureka作为服务注册中心
+
+
+
+### 23.1.1 认识Eureka
+
+![image-20201028073104449](img/image-20201028073104449.png)
+
+AWS 是亚马逊公司旗下的云计算服务平台.	
+
+
+
+### 23.1.2 在本地启动一个简单的Eureka服务
+
+![image-20201028073320210](img/image-20201028073320210.png)
+
+
+
+### 23.1.3  将服务注册到Eureka Server
+
+![image-20201028073438770](img/image-20201028073438770.png)
+
+
+
+### 23.1.4 关于 Bootstrap 属性
+
+![image-20201028073710826](img/image-20201028073710826.png)
+
+
+
+## 注意 不建议使用Eureka作为服务注册中心
+
+
+
+# 24.Spring Cloud Loadbalancer访问服务
+
+
+
+## 24.1 如何获得服务地址
+
+![image-20201028075540181](img/image-20201028075540181.png)
+
+获取服务地址有两种情况
+
+情况一:使用EurekaClient
+
+​	getNextServerFormEureka()
+
+情况二:使用DiscoveryClient (DiscoveryClient 是Spring Cloud提供的抽象  建议使用)
+
+​	getInstances()
+
+
+
+## 24.2 Load Balancer Client
+
+![image-20201028224334039](img/image-20201028224334039.png)
+
+为RestTemplate 或者 WebClient实现负载均衡
+
+使用Load Balancer 可以无需知道服务方的ip与端口,而是通过服务发现进行调用
+
+
+
+## 代码参考  Chapter 12   ribbon-customer-service
+
+
+
+
+
+# 25.使用 Feign 访问服务器
+
+## 25.1 认识 Feign
+
+![image-20201028230124391](img/image-20201028230124391.png)
+
+
+
+
+
+## 25.2 Feign的简单使用
+
+![image-20201028230753304](img/image-20201028230753304.png)
+
+
+
+## 25.3 通过配置定制Feign
+
+![image-20201028230943354](img/image-20201028230943354.png)
+
+
+
+![image-20201028231010284](img/image-20201028231010284.png)
+
+
+
+## 具体内容参考 官方文档
+
+
+
+
+
+# 26.深入理解服务发现背后的DiscoveryClient
+
+
+
+
+
+P94
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

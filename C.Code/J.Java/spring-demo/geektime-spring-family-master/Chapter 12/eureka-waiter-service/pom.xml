@@ -11,7 +11,7 @@
 	<groupId>geektime.spring.springbucks</groupId>
 	<artifactId>waiter-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>waiter-service</name>
+	<name>geektime-12-Eureka-client</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -96,7 +96,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement>	
 
 	<build>
 		<plugins>
