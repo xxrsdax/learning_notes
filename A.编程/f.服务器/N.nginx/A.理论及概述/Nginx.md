@@ -62,7 +62,34 @@ nginx是高性能的Http和反向代理服务器
 
 个人建议docker安装 nginx
 
+## 2.1 docker 安装nginx
 
+准备:docker已安装
+
+- docker pull nginx:版本号
+  - 拉取镜像
+- docker run --name nginxName  -p  宿主机端口:80    -d        nginx
+  - -v /home/docker-nginx/nginx.conf:/etc/nginx/nginx.conf 
+  - -v /home/docker-nginx/log:/var/log/nginx 
+  - -v /home/docker-nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf 
+  -  -v /home/nginx/www:/usr/share/nginx/html
+  - --name 给你启动的容器起个名字，以后可以使用这个名字启动或者停止容器
+  - -p 映射端口，将docker宿主机的80端口和容器的80端口进行绑定 
+  - -v 挂载文件用的，
+  - 第一个-v 表示将你本地的nginx.conf覆盖你要起启动的容器的nginx.conf文件，
+  - 第二个表示将日志文件进行挂载，就是把nginx服务器的日志写到你docker宿主机的/home/docker-nginx/log/下面
+  - 第三个-v 表示的和第一个-v意思一样的。
+  - 第四个-v 将我们自己创建的 www 目录挂载到容器的 /usr/share/nginx/html。
+  - -d 表示后台启动
+- 先简单启一个容器  然后从容器中cp出配置文件
+  - docker cp 容器名:/etc/nginx/nginx.conf    宿主机指定目录
+- 删除上一次启动容器,重新以一下命令启动
+- 目前电脑最终使用命令  挂载了 根目录  配置文件 默认配置文件 日志
+
+```
+docker run  --name nginx  -p 81:80 -v /home/xxrsdax/nginx/nginx-config/nginx.conf:/etc/nginx/nginx.conf  -v /home/xxrsdax/nginx/log:/var/log/nginx  -v /home/xxrsdax/nginx/nginx-config/conf.d/default.conf:/etc/nginx/conf.d/default.conf  -v /home/xxrsdax/nginx/nginx-data:/usr/share/nginx/html -d nginx
+
+```
 
 
 
@@ -259,8 +286,8 @@ root指令将会在其定义的目录下的子目录i中查找123.gif
 
 ​    
 ​    
-    Nginx在做反向代理时，提供性能稳定，并且能够提供配置灵活的转发功能。Nginx可以根据不同的正则匹配，采取不同的转发策略，比如图片文件结尾的走文件服务器，动态页面走web服务器，只要你正则写的没问题，又有相对应的服务器解决方案，你就可以随心所欲的玩。并且Nginx对返回结果进行错误页跳转，异常判断等。如果被分发的服务器存在异常，他可以将请求重新转发给另外一台服务器，然后自动去除异常服务器。
-    
+​    Nginx在做反向代理时，提供性能稳定，并且能够提供配置灵活的转发功能。Nginx可以根据不同的正则匹配，采取不同的转发策略，比如图片文件结尾的走文件服务器，动态页面走web服务器，只要你正则写的没问题，又有相对应的服务器解决方案，你就可以随心所欲的玩。并且Nginx对返回结果进行错误页跳转，异常判断等。如果被分发的服务器存在异常，他可以将请求重新转发给另外一台服务器，然后自动去除异常服务器。
+​    
     2、负载均衡
     Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询，加权轮询，Ip hash。扩展策略，就天马行空，只有你想不到的没有他做不到的啦，你可以参照所有的负载均衡算法，给他一一找出来做下实现。
     
@@ -269,14 +296,14 @@ root指令将会在其定义的目录下的子目录i中查找123.gif
 
 ​    
 ​    
-    Ip hash算法，对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。
+​    Ip hash算法，对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。
 
 
 ​    
 ​    
-    3、web缓存
-    Nginx可以对不同的文件做不同的缓存处理，配置灵活，并且支持FastCGI_Cache，主要用于对FastCGI的动态程序进行缓存。配合着第三方的ngx_cache_purge，对制定的URL缓存内容可以的进行增删管理。
-    
+​    3、web缓存
+​    Nginx可以对不同的文件做不同的缓存处理，配置灵活，并且支持FastCGI_Cache，主要用于对FastCGI的动态程序进行缓存。配合着第三方的ngx_cache_purge，对制定的URL缓存内容可以的进行增删管理。
+​    
     4、Nginx相关地址
     源码：https://trac.nginx.org/nginx/browser
     
@@ -300,16 +327,16 @@ root指令将会在其定义的目录下的子目录i中查找123.gif
 
 
 ​    
-    events {
-        worker_connections  1024;
-    }
+​    events {
+​        worker_connections  1024;
+​    }
 
 
 ​    
-    http {
-        include       mime.types;
-        default_type  application/octet-stream;
-    
+​    http {
+​        include       mime.types;
+​        default_type  application/octet-stream;
+​    
         #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
         #                  '$status $body_bytes_sent "$http_referer" '
         #                  '"$http_user_agent" "$http_x_forwarded_for"';
@@ -372,13 +399,13 @@ root指令将会在其定义的目录下的子目录i中查找123.gif
 
 
 ​    
-        # another virtual host using mix of IP-, name-, and port-based configuration
-        #
-        #server {
-        #    listen       8000;
-        #    listen       somename:8080;
-        #    server_name  somename  alias  another.alias;
-    
+​        # another virtual host using mix of IP-, name-, and port-based configuration
+​        #
+​        #server {
+​        #    listen       8000;
+​        #    listen       somename:8080;
+​        #    server_name  somename  alias  another.alias;
+​    
         #    location / {
         #        root   html;
         #        index  index.html index.htm;
@@ -387,12 +414,12 @@ root指令将会在其定义的目录下的子目录i中查找123.gif
 
 
 ​    
-        # HTTPS server
-        #
-        #server {
-        #    listen       443 ssl;
-        #    server_name  localhost;
-    
+​        # HTTPS server
+​        #
+​        #server {
+​        #    listen       443 ssl;
+​        #    server_name  localhost;
+​    
         #    ssl_certificate      cert.pem;
         #    ssl_certificate_key  cert.key;
     
